@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BEL AI Consulting | Turn AI into Value</title>
+  <meta name="description" content="AI consulting for managers and businesses — BEL AI Consulting">
+  <meta name="theme-color" content="#1E3A8A">
+  <link rel="icon" href="../assets/logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Vazirmatn:wght@400;500;700;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!--
+    Languages: English is the default and lives in this file.
+    Persian (fa) and German (de) live in i18n.js, keyed by data-i18n.
+  -->
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+  <!-- ================= Header (brand guide p.8) ================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="BEL AI Consulting">
+        <span class="logo-tile"><img src="../assets/logo.jpg" alt="BEL AI Consulting logo" data-i18n-attr="alt:logo.alt" width="50" height="50"></span>
+        <span class="brand-name" lang="en" dir="ltr">BEL AI Consulting</span>
+      </a>
+
+      <div class="header-end">
+        <nav id="site-nav" class="nav" aria-label="Main navigation" data-i18n-attr="aria-label:nav.label">
+          <a href="#services" data-i18n="nav.services">Services</a>
+          <a href="#about" data-i18n="nav.about">About us</a>
+          <a href="#contact" data-i18n="nav.contact">Contact</a>
+        </nav>
+
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.label">
+          <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+          <button type="button" data-lang="fa" lang="fa" aria-label="فارسی" aria-pressed="false">فا</button>
+          <button type="button" data-lang="de" lang="de" aria-label="Deutsch" aria-pressed="false">DE</button>
+        </div>
+
+        <button class="menu-toggle" type="button" aria-label="Menu" data-i18n-attr="aria-label:menu.label" aria-expanded="false" aria-controls="site-nav">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= Hero (brand guide p.8) ================= -->
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <span class="eyebrow ltr" lang="en">AI Adoption · Digital Transformation · AI Consulting</span>
+          <!-- Tagline stays in English in every language (brand tagline) -->
+          <h1 lang="en">Turn AI into <span class="value">Value</span></h1>
+          <p class="lead" data-i18n="hero.lead">Instead of focusing on theory and the hype around AI, we focus on practical implementation and real results.</p>
+          <a class="btn btn-accent" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="cta">Request a consultation</a>
+        </div>
+
+        <!-- Graphic elements per brand guide p.5: dots, circles, soft curves = connection & growth -->
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 420 380" role="presentation">
+            <defs>
+              <radialGradient id="warmGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stop-color="#F59E0B" stop-opacity="0.30"/>
+                <stop offset="1" stop-color="#F59E0B" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="coolGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stop-color="#3B82F6" stop-opacity="0.18"/>
+                <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="250" cy="200" r="175" fill="url(#warmGlow)"/>
+            <circle cx="140" cy="120" r="120" fill="url(#coolGlow)"/>
+            <circle cx="215" cy="195" r="128" fill="none" stroke="#3B82F6" stroke-opacity="0.28" stroke-width="2" stroke-dasharray="1 11" stroke-linecap="round"/>
+            <circle cx="215" cy="195" r="78" fill="none" stroke="#1E3A8A" stroke-opacity="0.10" stroke-width="1.5"/>
+
+            <path d="M58 312 C 118 312, 128 226, 196 212 S 286 150, 338 86" fill="none" stroke="#1E3A8A" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M196 212 C 248 222, 276 266, 346 258" fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+            <path d="M118 262 C 126 190, 170 140, 236 122" fill="none" stroke="#3B82F6" stroke-opacity="0.6" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M236 122 C 262 116, 284 112, 338 86" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="2 8"/>
+
+            <circle cx="58" cy="312" r="11" fill="#1E3A8A"/>
+            <circle cx="118" cy="262" r="7" fill="#F59E0B"/>
+            <circle cx="196" cy="212" r="16" fill="#FFFFFF" stroke="#3B82F6" stroke-width="4"/>
+            <circle cx="196" cy="212" r="6" fill="#3B82F6"/>
+            <circle cx="236" cy="122" r="9" fill="#3B82F6"/>
+            <circle cx="346" cy="258" r="10" fill="#1E3A8A"/>
+            <circle cx="338" cy="86" r="22" fill="#F59E0B" fill-opacity="0.22"/>
+            <circle cx="338" cy="86" r="13" fill="#F59E0B"/>
+
+            <circle cx="300" cy="320" r="4" fill="#3B82F6" fill-opacity="0.5"/>
+            <circle cx="90" cy="150" r="4" fill="#F59E0B" fill-opacity="0.6"/>
+            <circle cx="380" cy="180" r="5" fill="#3B82F6" fill-opacity="0.35"/>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-bar"></div>
+    </section>
+
+    <!-- ================= Positioning (brand guide p.3) ================= -->
+    <section class="statement" aria-label="Our positioning" data-i18n-attr="aria-label:statement.label">
+      <div class="container">
+        <div class="statement-card">
+          <p data-i18n="statement">We don’t talk about the latest AI tools; we show how you can <mark>work better with AI, make decisions faster, and have more time for valuable work.</mark></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Target audience (brand guide p.3) ================= -->
+    <section class="section audience" id="audience">
+      <div class="container">
+        <div class="section-head">
+          <h2><span data-i18n="audience.title">Our Audience</span><span class="en-label" lang="en">Target Audience</span></h2>
+        </div>
+        <div class="grid grid-4">
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19.5h20"/></svg></div>
+            <p data-i18n="audience.1">Professionals and knowledge workers</p>
+          </div>
+          <div class="card">
+            <div class="icon warm"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.2" cy="9" r="2.4"/><path d="M16.4 13.6c2.7.4 4.6 2.8 4.6 5.9"/></svg></div>
+            <p data-i18n="audience.2">Middle managers</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 10v9.5h15V10"/><path d="M3 10l2.2-5.5h13.6L21 10z"/><path d="M10 19.5v-5h4v5"/></svg></div>
+            <p data-i18n="audience.3">Owners of small and medium-sized businesses</p>
+          </div>
+          <div class="card">
+            <div class="icon warm"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></div>
+            <p data-i18n="audience.4">IT and digital transformation teams</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Services =================
+         DRAFT / پیش‌نویس موقت — these four services are not in the brand guide;
+         they were built from the guide's own text (titles, USP, key messages,
+         educational tone, audience needs). Replace with the real list later,
+         here (English) and in i18n.js (services.* for Persian and German). -->
+    <section class="section services" id="services">
+      <div class="container">
+        <div class="section-head">
+          <h2><span data-i18n="services.title">Services</span><span class="en-label" lang="en">Services</span></h2>
+        </div>
+        <div class="grid grid-2">
+          <article class="card card-rule">
+            <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5"/></svg></div>
+            <h3><span data-i18n="services.1.title">AI Adoption Consulting</span><span class="en-label" lang="en">AI Adoption</span></h3>
+            <p data-i18n="services.1.text">Identifying the right problem and the right path for using AI in the daily work of individuals and teams.</p>
+          </article>
+          <article class="card card-rule">
+            <div class="icon warm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 3.5 8 12 12.5 20.5 8z"/><path d="M3.5 12.5 12 17l8.5-4.5"/><path d="M3.5 16.5 12 21l8.5-4.5"/></svg></div>
+            <h3><span data-i18n="services.2.title">Digital Transformation Support</span><span class="en-label" lang="en">Digital Transformation</span></h3>
+            <p data-i18n="services.2.text">Practical AI implementation with a focus on real business results.</p>
+          </article>
+          <article class="card card-rule">
+            <div class="icon warm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></svg></div>
+            <h3><span data-i18n="services.3.title">Practical AI Training</span></h3>
+            <p data-i18n="services.3.text">Simple and step by step for managers and teams, with no need for deep technical expertise.</p>
+          </article>
+          <article class="card card-rule">
+            <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div>
+            <h3><span data-i18n="services.4.title">Higher Productivity, Less Repetitive Work</span></h3>
+            <p data-i18n="services.4.text">Simple, practical solutions to save time and make faster, better decisions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Key messages (brand guide p.7) ================= -->
+    <section class="section messages" id="messages">
+      <div class="container">
+        <div class="section-head">
+          <h2><span data-i18n="messages.title">Our Message</span><span class="en-label" lang="en">Key Messages</span></h2>
+        </div>
+        <div class="grid grid-3">
+          <div class="msg">
+            <p data-i18n="messages.1">AI is valuable when it leads to real business results.</p>
+            <span class="msg-num" aria-hidden="true" data-i18n="messages.1.num">1</span>
+          </div>
+          <div class="msg">
+            <p data-i18n="messages.2">You don’t need to be a technology expert to use AI; you just need to know the right path.</p>
+            <span class="msg-num" aria-hidden="true" data-i18n="messages.2.num">2</span>
+          </div>
+          <div class="msg">
+            <p data-i18n="messages.3">Every business can benefit from AI if it starts with the right problem.</p>
+            <span class="msg-num" aria-hidden="true" data-i18n="messages.3.num">3</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= About (brand guide p.2–3) ================= -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2><span data-i18n="about.title">About Us</span><span class="en-label" lang="en">About</span></h2>
+        </div>
+
+        <div class="about-top">
+          <p class="pitch" data-i18n="about.pitch">We help individuals and organizations turn AI from a complex, hype-filled topic into a practical tool for boosting productivity, improving decision-making, and creating real value. Drawing on our experience in technology, digital transformation, and corporate environments, we show people how to use AI in their daily work in a simple, effective, and results-driven way.</p>
+
+          <!-- Person card (brand guide p.1 and p.9 email signature) -->
+          <div class="person-card">
+            <span class="logo-tile"><img src="../assets/logo.jpg" alt="" width="64" height="64"></span>
+            <span class="divider" aria-hidden="true"></span>
+            <div lang="en" dir="ltr">
+              <p class="name">Nasrin Bel</p>
+              <p class="role">AI Adoption Specialist &amp; Digital Transformation | AI Consultant</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2 mv">
+          <div class="card card-rule">
+            <h3><span data-i18n="about.mission.title">Mission</span><span class="en-label" lang="en">Mission</span></h3>
+            <!-- Original English text from the brand guide (also shown on the Persian page); German in i18n.js -->
+            <p lang="en" dir="ltr" data-fa-lang="en" data-i18n="about.mission.text">Helping professionals, leaders, and organizations leverage AI in their daily work to improve productivity and create sustainable competitive advantage through simple, practical, and actionable solutions.</p>
+          </div>
+          <div class="card card-rule">
+            <h3><span data-i18n="about.vision.title">Vision</span><span class="en-label" lang="en">Vision</span></h3>
+            <p lang="en" dir="ltr" data-fa-lang="en" data-i18n="about.vision.text">To become a leading voice in AI Adoption and AI Consulting, empowering professionals, leaders, and organizations to unlock the full potential of AI through practical, human-centered, and results-driven solutions.</p>
+          </div>
+        </div>
+
+        <h3 class="sub-head"><span data-i18n="values.title">Values</span><span class="en-label" lang="en">Values</span></h3>
+        <div class="grid grid-4">
+          <div class="card card-top">
+            <h3 data-i18n="values.1.title">Pragmatism</h3>
+            <p data-i18n="values.1.text">We focus on results and outcomes, not just theoretical knowledge.</p>
+          </div>
+          <div class="card card-top">
+            <h3 data-i18n="values.2.title">Simplicity</h3>
+            <p data-i18n="values.2.text">Making topics complicated is not a sign of expertise; explaining them simply is.</p>
+          </div>
+          <div class="card card-top">
+            <h3 data-i18n="values.3.title">Continuous Learning</h3>
+            <p data-i18n="values.3.text">Personal and professional growth is an ongoing journey.</p>
+          </div>
+          <div class="card card-top">
+            <h3 data-i18n="values.4.title">Honesty</h3>
+            <p data-i18n="values.4.text">Trust is our most important asset.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Contact (text from brand guide p.8 Instagram bio) ================= -->
+    <section class="contact" id="contact">
+      <svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 0H1440V24C1180 78 900 74 720 46C520 14 260 18 0 56Z"/>
+      </svg>
+      <div class="container contact-inner">
+        <span class="kicker" data-i18n="contact.kicker">Contact</span>
+        <h2 data-i18n="contact.title">Turning ideas into value with AI</h2>
+        <p data-i18n="contact.text">AI consulting for managers and businesses</p>
+        <a class="btn btn-accent" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="cta">Request a consultation</a>
+        <div class="contact-link">
+          <a href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10.5V16.5M8 7.6v.01M12 16.5v-6M12 13a2.6 2.6 0 0 1 5.2 0v3.5"/></svg>
+            <span lang="en" dir="ltr">linkedin.com/in/nasrin-bel-654ba9109</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-tile"><img src="../assets/logo.jpg" alt="BEL AI Consulting logo" data-i18n-attr="alt:logo.alt" width="50" height="50"></span>
+        <div lang="en" dir="ltr">
+          <p class="name">BEL AI Consulting</p>
+          <p class="tagline">Turn AI into Value</p>
+        </div>
+      </div>
+      <a class="footer-link" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10.5V16.5M8 7.6v.01M12 16.5v-6M12 13a2.6 2.6 0 0 1 5.2 0v3.5"/></svg>
+        <span lang="en">LinkedIn</span>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.menu-toggle');
+      var nav = document.getElementById('site-nav');
+      if (!toggle || !nav) return;
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+  </script>
+  <script src="i18n.js"></script>
+</body>
+</html>
