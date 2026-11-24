@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BEL AI Consulting | Turn AI into Value</title>
+  <meta name="description" content="AI consulting for managers and businesses — BEL AI Consulting">
+  <meta name="theme-color" content="#1E3A8A">
+  <link rel="icon" href="../assets/logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Vazirmatn:wght@400;500;700;800&display=swap">
+  <style>
+    /* ---------- Brand tokens (brand guide p.4–5) ---------- */
+    :root {
+      --primary: #1E3A8A;        /* اصلی */
+      --complement: #3B82F6;     /* مکمل */
+      --accent: #F59E0B;         /* تأکید */
+      --accent-hover: #FBB13C;
+      --accent-border: #E08E06;
+      --bg: #F8FAFC;             /* پس‌زمینه */
+      --text: #0F172A;           /* متن */
+      --muted: #475569;
+      --hero-bg: #F2F1F0;        /* matches the hero video's own background */
+      --marker: rgba(245, 158, 11, 0.26);
+
+      --font-en: 'Roboto', 'Vazirmatn', system-ui, sans-serif;
+      --font-fa: 'Vazirmatn', 'Roboto', system-ui, sans-serif;
+
+      --page-start: clamp(20px, 9vw, 118px);
+      --hero-indent: min(238px, 28vw);
+      --about-indent: min(160px, 18vw);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--hero-bg);
+      color: var(--muted);
+      font-family: var(--font-en);
+      -webkit-font-smoothing: antialiased;
+    }
+    :lang(en), :lang(de) { font-family: var(--font-en); }
+    :lang(fa) { font-family: var(--font-fa); }
+
+    a { color: var(--text); text-decoration: none; }
+    a:hover { color: var(--primary); }
+    :focus-visible { outline: 3px solid var(--complement); outline-offset: 3px; }
+
+    h1, h2 {
+      margin: 0;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      line-height: 0.98;
+    }
+    h1 > span, h2 > span { display: block; }
+
+    /* Highlight word: brand blue with the amber marker from the current site */
+    .accent {
+      color: var(--complement);
+      background: linear-gradient(transparent 64%, var(--marker) 64%, var(--marker) 92%, transparent 92%);
+    }
+
+    /* ---------- Shared CTA ---------- */
+    /* The prompt's cut corners, softened to brand-style rounded corners (brand guide p.5) */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--accent);
+      border: 1px solid var(--accent-border);
+      border-radius: 4px 18px 4px 18px;
+      color: var(--text);
+      font: inherit;
+      font-size: clamp(13px, 2.2vw, 16px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 18px 34px;
+      white-space: nowrap;
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.35), 0 10px 30px -12px rgba(224, 142, 6, 0.6);
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover {
+      background: var(--accent-hover);
+      color: var(--text);
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.55), 0 14px 36px -10px rgba(224, 142, 6, 0.8);
+    }
+    .btn::after {
+      content: "";
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--text);
+    }
+
+    /* ---------- Section 1: Hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      background: var(--hero-bg);
+      overflow: hidden;
+    }
+
+    .hero-media {
+      position: absolute;
+      top: 0;
+      inset-inline-end: -20%;
+      width: 99%;
+      pointer-events: none;
+      isolation: isolate;
+      z-index: 0;
+    }
+    .hero-media video,
+    .about-frame video {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    /* Tints the video's coloured highlights in a brand colour, leaves greys alone.
+       Shown only once the video has a frame; otherwise it would be a solid colour box. */
+    .tint {
+      display: none;
+      position: absolute;
+      inset: 0;
+      mix-blend-mode: hue;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .is-ready > .tint { display: block; }
+    .tint-blue { background: var(--complement); }
+    .tint-amber { background: var(--accent); }
+
+    .hero-scrim {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      inset-inline-start: 0;
+      width: 70%;
+      background: linear-gradient(to right, #F2F1F0 0%, #F2F1F0 55%, rgba(242, 241, 240, 0.85) 78%, rgba(242, 241, 240, 0) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    /* Navbar */
+    .nav {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: clamp(20px, 5vw, 56px);
+      padding: clamp(20px, 3vw, 38px) clamp(20px, 4vw, 48px) 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+    }
+    .brand:hover { color: var(--text); }
+    .logo-tile {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #fff;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06), 0 4px 14px -6px rgba(30, 58, 138, 0.35);
+    }
+    .logo-tile img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .brand-name {
+      font-family: var(--font-en);
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: clamp(12px, 2.4vw, 15px);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-end {
+      margin-inline-start: auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      gap: 2px;
+      padding: 3px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08);
+    }
+    .lang-switch button {
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .lang-switch button:lang(en), .lang-switch button:lang(de) { font-family: var(--font-en); }
+    .lang-switch button:lang(fa) { font-family: var(--font-fa); }
+    .lang-switch button[aria-pressed="true"] { background: var(--primary); color: #fff; }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 14px 26px;
+      border-radius: 4px 12px 4px 12px;
+      transition: background 0.2s ease;
+      white-space: nowrap;
+    }
+    .contact-btn:hover { color: var(--text); background: rgba(15, 23, 42, 0.06); }
+    /* white only once the dark video is actually behind it */
+    .video-ready .contact-btn { color: #fff; }
+    .video-ready .contact-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.14); }
+    .contact-btn svg { display: block; flex-shrink: 0; }
+
+    .menu-toggle {
+      display: none;
+      margin-inline-start: auto;
+      flex-direction: column;
+      gap: 5px;
+      padding: 10px 6px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--text);
+    }
+    .video-ready .menu-toggle span { background: #fff; }
+
+    .mobile-menu {
+      display: none;
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 22px;
+      border-radius: 16px;
+      background: rgba(248, 250, 252, 0.96);
+      box-shadow: 0 18px 40px -20px rgba(30, 58, 138, 0.35);
+    }
+    .mobile-menu ul {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .mobile-menu a {
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Headline: "Turn AI into Value" as a staircase */
+    .hero h1 {
+      padding: min(clamp(40px, 8vw, 110px), 9vh) 20px 0;
+      padding-inline-start: var(--page-start);
+      font-size: min(clamp(44px, 9vw, 120px), 12.5vh);
+    }
+    .hero h1 .indent { padding-inline-start: var(--hero-indent); }
+
+    .hero-lead {
+      /* stops before the dark half of the video on medium screens */
+      max-width: min(420px, calc(68vw - var(--page-start) - var(--hero-indent)));
+      margin: min(28px, 3.5vh) 20px 0;
+      margin-inline-start: calc(var(--page-start) + var(--hero-indent));
+      font-size: clamp(15px, 1.5vw, 18px);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .hero-cta {
+      padding: min(clamp(24px, 3vw, 36px), 4vh) 20px min(clamp(36px, 6vw, 80px), 7vh);
+      padding-inline-start: calc(var(--page-start) + var(--hero-indent));
+    }
+
+    /* ---------- Section 2: About ---------- */
+    .about {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      background: linear-gradient(180deg, #F2F1F0 0%, #F8FAFC 18%, #F8FAFC 100%);
+      padding-block: clamp(60px, 10vw, 140px) clamp(30px, 5vw, 70px);
+      padding-inline: var(--page-start) 0;
+    }
+
+    .about-text {
+      flex: 1 1 420px;
+      min-width: 300px;
+      padding-inline-end: 20px;
+    }
+    .about h2 { font-size: clamp(38px, 6.5vw, 80px); }
+    .about h2 .indent { padding-inline-start: var(--about-indent); }
+    .about p {
+      max-width: 520px;
+      margin: 32px 0 0;
+      margin-inline-start: var(--about-indent);
+      font-size: clamp(14px, 1.6vw, 17px);
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .about .btn { margin-top: 36px; margin-inline-start: var(--about-indent); }
+
+    .about-media {
+      flex: 1 1 360px;
+      min-width: 280px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .about-frame {
+      position: relative;
+      width: 100%;
+      max-width: 644px;
+      overflow: hidden;
+      isolation: isolate;
+      border-start-start-radius: 32px;
+      border-end-start-radius: 32px;
+      box-shadow: 0 28px 60px -34px rgba(30, 58, 138, 0.35);
+    }
+    .about-frame:not(.is-ready) { box-shadow: none; }
+
+    /* ---------- Persian (right-to-left) ---------- */
+    [dir="rtl"] .hero-media { transform: scaleX(-1); }
+    [dir="rtl"] .hero-scrim {
+      background: linear-gradient(to left, #F2F1F0 0%, #F2F1F0 55%, rgba(242, 241, 240, 0.85) 78%, rgba(242, 241, 240, 0) 100%);
+    }
+    html[lang="fa"] :is(.nav-links a, .mobile-menu a, .contact-btn, .btn, .about h2 > span:first-child) {
+      letter-spacing: 0;
+    }
+    html[lang="fa"] .about h2 { line-height: 1.25; }
+    html[lang="fa"] :is(.hero-lead, .about p) { line-height: 1.95; }
+
+    /* ---------- Collapse the nav into a menu button ---------- */
+    @media (max-width: 1000px) {
+      .nav-links,
+      .nav-end { display: none; }
+      .menu-toggle { display: flex; }
+      .nav.is-open .mobile-menu { display: flex; }
+    }
+
+    /* ---------- Mobile (≤700px) ---------- */
+    @media (max-width: 700px) {
+      .hero-media {
+        inset-inline-end: auto;
+        inset-inline-start: -12%;
+        width: 119%;
+      }
+      .hero-scrim { display: none; }
+
+      /* the video sits behind the nav here, so the name gets a light backing */
+      .brand {
+        padding: 4px;
+        padding-inline-end: 14px;
+        border-radius: 15px;
+        background: rgba(248, 250, 252, 0.9);
+        box-shadow: 0 6px 18px -10px rgba(15, 23, 42, 0.35);
+      }
+      .brand-name { font-size: 17px; }
+
+      .hero h1 {
+        /* starts just below the video, whatever the phone width */
+        margin-top: calc(67vw + 8px);
+        padding: 0 20px;
+        font-size: clamp(40px, 13vw, 72px);
+      }
+      .hero-lead {
+        max-width: none;
+        margin: 24px 20px 0;
+      }
+      .hero-cta { padding: 26px 20px 40px; }
+    }
+
+    @media (max-width: 420px) {
+      .btn { letter-spacing: 0.08em; padding: 16px 22px; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    Layout from the frontend prompt; colours, fonts, shapes and text from the BEL brand guide.
+    English is the default and lives in this file; Persian and German are in the script below.
+  -->
+
+  <!-- ================= Section 1: Hero ================= -->
+  <section class="hero" id="home">
+    <div class="hero-media" aria-hidden="true">
+      <video data-autoplay autoplay muted loop playsinline preload="auto"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260823_050407_500d0339-ab28-41c1-9688-132a74a3b5aa.mp4"></video>
+      <div class="tint tint-blue"></div>
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <nav class="nav" aria-label="Main navigation" data-i18n-attr="aria-label:nav.label">
+        <a class="brand" href="#home" aria-label="BEL AI Consulting">
+          <span class="logo-tile"><img src="../assets/logo.jpg" alt="BEL AI Consulting logo" data-i18n-attr="alt:logo.alt" width="42" height="42"></span>
+          <span class="brand-name" lang="en" dir="ltr">BEL AI Consulting</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#home" data-i18n="nav.home">Home</a></li>
+          <li><a href="#about" data-i18n="nav.about">About</a></li>
+          <li><a href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-end">
+          <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.label">
+            <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+            <button type="button" data-lang="fa" lang="fa" aria-label="فارسی" aria-pressed="false">فا</button>
+            <button type="button" data-lang="de" lang="de" aria-label="Deutsch" aria-pressed="false">DE</button>
+          </div>
+          <a class="contact-btn" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener">
+            <svg width="17" height="13" viewBox="0 0 17 13" fill="none" aria-hidden="true">
+              <rect x="0.7" y="0.7" width="15.6" height="11.6" rx="2" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M1.2 1.4L8.5 7.2L15.8 1.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span data-i18n="contact.btn">Contact us</span>
+          </a>
+        </div>
+
+        <button class="menu-toggle" type="button" aria-label="Menu" data-i18n-attr="aria-label:menu.label" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+
+        <div class="mobile-menu" id="mobile-menu">
+          <ul>
+            <li><a href="#home" data-i18n="nav.home">Home</a></li>
+            <li><a href="#about" data-i18n="nav.about">About</a></li>
+            <li><a href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+          <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.label">
+            <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+            <button type="button" data-lang="fa" lang="fa" aria-label="فارسی" aria-pressed="false">فا</button>
+            <button type="button" data-lang="de" lang="de" aria-label="Deutsch" aria-pressed="false">DE</button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Brand tagline stays in English in every language (brand guide p.6) -->
+      <h1 lang="en">
+        <span>Turn</span>
+        <span>AI</span>
+        <span class="indent">Into</span>
+        <span class="indent"><span class="accent">Value</span></span>
+      </h1>
+
+      <p class="hero-lead" data-i18n="hero.lead">Instead of focusing on theory and the hype around AI, we focus on practical implementation and real results.</p>
+
+      <div class="hero-cta">
+        <a class="btn" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="cta">Request a consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Section 2: About ================= -->
+  <section class="about" id="about">
+    <div class="about-text">
+      <h2>
+        <span data-i18n="about.title">About</span>
+        <span class="indent"><span class="accent" lang="en">BEL</span></span>
+      </h2>
+      <p data-i18n="about.pitch">We help individuals and organizations turn AI from a complex, hype-filled topic into a practical tool for boosting productivity, improving decision-making, and creating real value. Drawing on our experience in technology, digital transformation, and corporate environments, we show people how to use AI in their daily work in a simple, effective, and results-driven way.</p>
+      <a class="btn" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="learn">Learn more</a>
+    </div>
+
+    <div class="about-media">
+      <div class="about-frame">
+        <video data-autoplay autoplay muted loop playsinline preload="auto" aria-hidden="true"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260823_063501_2e2c8971-de1e-473a-8611-a0c9ae7ee186.mp4"></video>
+        <div class="tint tint-amber" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* ---------- Mobile menu ---------- */
+    (function () {
+      var nav = document.querySelector('.nav');
+      var toggle = document.querySelector('.menu-toggle');
+      function close() {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+      document.querySelectorAll('.mobile-menu a').forEach(function (a) { a.addEventListener('click', close); });
+    })();
+
+    /* ---------- Video autoplay: always muted, retry every second and on first tap ---------- */
+    (function () {
+      var videos = document.querySelectorAll('video[data-autoplay]');
+      // Turn the tint on only once a frame can be shown
+      videos.forEach(function (video) {
+        function ready() {
+          video.parentElement.classList.add('is-ready');
+          var hero = video.closest('.hero');
+          if (hero) hero.classList.add('video-ready');
+        }
+        if (video.readyState >= 2) ready();
+        video.addEventListener('loadeddata', ready);
+      });
+      function tryPlay() {
+        videos.forEach(function (video) {
+          video.muted = true;
+          if (video.paused) {
+            var attempt = video.play();
+            if (attempt && attempt.catch) attempt.catch(function () {});
+          }
+        });
+      }
+      tryPlay();
+      setInterval(tryPlay, 1000);
+      function kick() {
+        tryPlay();
+        document.removeEventListener('click', kick);
+        document.removeEventListener('touchstart', kick);
+      }
+      document.addEventListener('click', kick);
+      document.addEventListener('touchstart', kick, { passive: true });
+    })();
+
+    /* ---------- Languages: en (default, in the HTML above) / fa / de ----------
+       Persian and German text is reused from the current site (i18n.js).
+       The language choice is shared with the current site. */
+    (function () {
+      var DEFAULT_LANG = 'en';
+      var LANGS = ['en', 'fa', 'de'];
+      var DIR = { en: 'ltr', fa: 'rtl', de: 'ltr' };
+      var STORAGE_KEY = 'bel-site-lang';
+      // LinkedIn guest pages in the matching language: uk = English, de = German, ir = Persian
+      var LINKEDIN_HOST = { en: 'uk.linkedin.com', de: 'de.linkedin.com', fa: 'ir.linkedin.com' };
+
+      var T = {
+        fa: {
+          'meta.description': 'مشاوره هوش مصنوعی برای مدیران و کسب‌وکارها — BEL AI Consulting',
+          'logo.alt': 'لوگوی BEL AI Consulting',
+          'nav.label': 'منوی اصلی',
+          'menu.label': 'منو',
+          'lang.label': 'زبان',
+          'nav.home': 'خانه',
+          'nav.about': 'درباره‌ی ما',
+          'nav.contact': 'تماس',
+          'contact.btn': 'تماس با ما',
+          'hero.lead': 'به جای تمرکز بر تئوری و هیاهوی پیرامون AI، روی پیاده‌سازی عملی و نتایج واقعی تمرکز می‌کنیم.',
+          'cta': 'درخواست مشاوره',
+          'about.title': 'درباره‌ی',
+          'about.pitch': 'به افراد و سازمان‌ها کمک می‌کنیم هوش مصنوعی را از یک موضوع پیچیده و پر از هیاهو به ابزاری عملی برای افزایش بهره‌وری، بهبود تصمیم‌گیری و خلق ارزش واقعی تبدیل کنند. با تکیه بر تجربه‌مان در فناوری، تحول دیجیتال و محیط‌های سازمانی، به افراد نشان می‌دهیم چگونه از AI در کار روزمره خود به شکلی ساده، مؤثر و نتیجه‌محور استفاده کنند.',
+          'learn': 'بیشتر بدانید'
+        },
+        de: {
+          'meta.description': 'KI-Beratung für Führungskräfte und Unternehmen — BEL AI Consulting',
+          'logo.alt': 'Logo von BEL AI Consulting',
+          'nav.label': 'Hauptnavigation',
+          'menu.label': 'Menü',
+          'lang.label': 'Sprache',
+          'nav.home': 'Start',
+          'nav.about': 'Über uns',
+          'nav.contact': 'Kontakt',
+          'contact.btn': 'Kontakt',
+          'hero.lead': 'Statt uns auf Theorie und den Hype rund um KI zu konzentrieren, setzen wir auf praktische Umsetzung und echte Ergebnisse.',
+          'cta': 'Beratung anfragen',
+          'about.title': 'Über',
+          'about.pitch': 'Wir helfen Menschen und Organisationen, KI von einem komplexen, von Hype geprägten Thema in ein praktisches Werkzeug zu verwandeln – für mehr Produktivität, bessere Entscheidungen und echten Mehrwert. Gestützt auf unsere Erfahrung in Technologie, digitaler Transformation und Unternehmensumfeldern zeigen wir, wie man KI einfach, wirksam und ergebnisorientiert im Arbeitsalltag einsetzt.',
+          'learn': 'Mehr erfahren'
+        }
+      };
+
+      var root = document.documentElement;
+      var metaDesc = document.querySelector('meta[name="description"]');
+      var textEls = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+      var attrEls = Array.prototype.slice.call(document.querySelectorAll('[data-i18n-attr]'));
+      var buttons = Array.prototype.slice.call(document.querySelectorAll('.lang-switch [data-lang]'));
+      var linkedinLinks = Array.prototype.slice.call(document.querySelectorAll('a[href*="linkedin.com/in/"]'));
+
+      function parseAttrMap(el) {
+        return el.getAttribute('data-i18n-attr').split(';').map(function (part) {
+          var bits = part.split(':');
+          return { attr: bits[0].trim(), key: (bits[1] || '').trim() };
+        });
+      }
+
+      // English defaults come from the page itself
+      var base = { 'meta.description': metaDesc ? metaDesc.content : '' };
+      textEls.forEach(function (el) { base[el.getAttribute('data-i18n')] = el.innerHTML; });
+      attrEls.forEach(function (el) {
+        parseAttrMap(el).forEach(function (pair) { base[pair.key] = el.getAttribute(pair.attr); });
+      });
+
+      function lookup(lang, key) {
+        var dict = T[lang];
+        if (dict && Object.prototype.hasOwnProperty.call(dict, key)) return dict[key];
+        return base[key];
+      }
+
+      function apply(lang) {
+        if (LANGS.indexOf(lang) === -1) lang = DEFAULT_LANG;
+        root.lang = lang;
+        root.dir = DIR[lang];
+        if (metaDesc) metaDesc.content = lookup(lang, 'meta.description');
+        textEls.forEach(function (el) { el.innerHTML = lookup(lang, el.getAttribute('data-i18n')); });
+        attrEls.forEach(function (el) {
+          parseAttrMap(el).forEach(function (pair) { el.setAttribute(pair.attr, lookup(lang, pair.key)); });
+        });
+        buttons.forEach(function (btn) {
+          btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+        });
+        linkedinLinks.forEach(function (a) {
+          try {
+            var url = new URL(a.href);
+            url.hostname = LINKEDIN_HOST[lang] || LINKEDIN_HOST[DEFAULT_LANG];
+            a.href = url.toString();
+          } catch (e) { /* leave link as is */ }
+        });
+      }
+
+      function save(lang) {
+        try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* storage unavailable */ }
+        try {
+          var url = new URL(window.location.href);
+          if (lang === DEFAULT_LANG) url.searchParams.delete('lang'); else url.searchParams.set('lang', lang);
+          history.replaceState(null, '', url.toString());
+        } catch (e) { /* ignore */ }
+      }
+
+      function initialLang() {
+        try {
+          var fromUrl = new URLSearchParams(window.location.search).get('lang');
+          if (fromUrl && LANGS.indexOf(fromUrl) !== -1) return fromUrl;
+        } catch (e) { /* ignore */ }
+        try {
+          var stored = localStorage.getItem(STORAGE_KEY);
+          if (stored && LANGS.indexOf(stored) !== -1) return stored;
+        } catch (e) { /* ignore */ }
+        return DEFAULT_LANG;
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var lang = btn.getAttribute('data-lang');
+          apply(lang);
+          save(lang);
+        });
+      });
+
+      var start = initialLang();
+      if (start !== DEFAULT_LANG) apply(start);
+    })();
+  </script>
+</body>
+</html>

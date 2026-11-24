@@ -1,0 +1,1632 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>BEL AI Consulting | Turn AI into Value</title>
+  <meta name="description" content="AI consulting for managers and businesses — BEL AI Consulting">
+  <meta name="theme-color" content="#1E3A8A">
+  <link rel="icon" href="../assets/logo.jpg" type="image/jpeg">
+  <script>
+    document.documentElement.classList.add('js');
+    if ('IntersectionObserver' in window) document.documentElement.classList.add('reveal-ready');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net">
+  <link rel="preload" as="image" fetchpriority="high" href="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/af6deff1-d678-4dc6-ae24-2880b16cdb20.jpg">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/instrumentserif/v5/jizBRFtNs2ka5fXjeivQ4LroWlx-6zUTjnTLgNs.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2">
+  <!-- Persian only: Instrument Serif and Inter have no Persian letters. Its files load only when Persian text is on screen. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap">
+
+  <style>
+    /* ---------- Fonts from the power-button prompt (self-hosted latin woff2) ---------- */
+    @font-face {
+      font-family: 'Instrument Serif';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/instrumentserif/v5/jizBRFtNs2ka5fXjeivQ4LroWlx-6zUTjnTLgNs.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @property --lit {
+      syntax: '<number>';
+      inherits: true;
+      initial-value: 0;
+    }
+
+    /* ---------- Brand tokens (brand guide p.4) ---------- */
+    :root {
+      --primary: #1E3A8A;
+      --complement: #3B82F6;
+      --accent: #F59E0B;
+      --accent-hover: #FBB13C;
+      --accent-ink: #B45309;          /* amber that stays readable as text on light backgrounds */
+      --bg: #F8FAFC;
+      --text: #0F172A;
+      --muted: #475569;
+      --line: rgba(15, 23, 42, 0.09);
+      --blue-soft: rgba(59, 130, 246, 0.10);
+      --accent-soft: rgba(245, 158, 11, 0.16);
+      --shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 22px 44px -30px rgba(30, 58, 138, 0.38);
+
+      --serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+      --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --fa: 'Vazirmatn', 'Inter', system-ui, sans-serif;
+
+      --u: calc(100vw / 1902);                          /* prompt unit: 1/1902 of the viewport width */
+      --gutter: max(20px, env(safe-area-inset-left), env(safe-area-inset-right));
+      --edge: max(var(--gutter), calc(105 * var(--u)));  /* left/right edge of full-bleed areas */
+      --header-h: 76px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--header-h) + 16px);
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: rgba(30, 58, 138, 0.15);
+    }
+    @media (pointer: fine) { html { overscroll-behavior: none; } }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+    :lang(fa) { font-family: var(--fa); }
+    [lang="en"], [lang="de"] { font-family: inherit; }
+
+    img, svg, video, canvas { display: block; max-width: 100%; }
+    a { color: inherit; }
+    a, button { touch-action: manipulation; }
+    p { margin: 0; }
+    h1, h2, h3, h4 { margin: 0; font-weight: 400; text-wrap: balance; }
+    ul { margin: 0; padding: 0; list-style: none; }
+
+    :focus-visible { outline: 3px solid var(--complement); outline-offset: 3px; border-radius: 6px; }
+    .js .over-hero :focus-visible, .scene :focus-visible, .site-footer :focus-visible { outline-color: #fff; }
+
+    .container { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: var(--gutter); }
+
+    .skip-link {
+      position: absolute; inset-inline-start: 16px; top: -60px; z-index: 100;
+      background: var(--primary); color: #fff; padding: 10px 16px; border-radius: 10px;
+      text-decoration: none; font-weight: 600; transition: top 0.2s ease;
+    }
+    .skip-link:focus-visible { top: 12px; }
+
+    /* Underline that wipes in from the start side and out to the end side (prompt) */
+    .ulink { position: relative; display: inline-block; text-decoration: none; }
+    .ulink::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      bottom: -0.12em;
+      height: var(--ul, 1.6px);
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right center;
+      transition: transform 0.32s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+    .ulink:hover::after, .ulink:focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+    [dir="rtl"] .ulink::after { transform-origin: left center; }
+    [dir="rtl"] .ulink:hover::after, [dir="rtl"] .ulink:focus-visible::after { transform-origin: right center; }
+
+    /* Buttons: brand rounded shapes (brand guide p.5) */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 12px 26px;
+      border-radius: 999px;
+      border: 1.5px solid transparent;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: var(--text);
+      box-shadow: 0 10px 24px -14px rgba(224, 142, 6, 0.9);
+    }
+    .btn-accent:hover { background: var(--accent-hover); box-shadow: 0 14px 30px -12px rgba(224, 142, 6, 0.95); }
+    .btn-sm { min-height: 40px; padding: 8px 18px; font-size: 14px; }
+    .arrow { width: 18px; height: 18px; flex-shrink: 0; }
+    [dir="rtl"] .arrow { transform: scaleX(-1); }
+
+    .icon {
+      width: 46px; height: 46px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: var(--blue-soft); color: var(--primary);
+      flex-shrink: 0;
+    }
+    .icon.warm { background: var(--accent-soft); color: var(--accent-ink); }
+    .icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary);
+    }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); flex-shrink: 0; }
+
+    /* ---------- Header: transparent with the power wordmark over the scene, solid bar after it ---------- */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      color: var(--text);
+      background: rgba(248, 250, 252, 0.88);
+      -webkit-backdrop-filter: saturate(1.4) blur(14px);
+      backdrop-filter: saturate(1.4) blur(14px);
+      border-bottom: 1px solid var(--line);
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+    .js .site-header.over-hero {
+      color: #fff;
+      background: transparent;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border-bottom-color: transparent;
+    }
+    .header-inner { display: flex; align-items: center; gap: 28px; min-height: var(--header-h); padding-inline: var(--edge); position: relative; }
+
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; min-width: 0; }
+    .logo-tile {
+      width: 44px; height: 44px; border-radius: 12px; overflow: hidden; flex-shrink: 0; background: #fff;
+      box-shadow: 0 0 0 1px var(--line), 0 6px 16px -10px rgba(30, 58, 138, 0.5);
+    }
+    .logo-tile img { width: 100%; height: 100%; object-fit: contain; }
+    .brand-name { font-family: var(--serif); font-size: 26px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
+
+    /* only one brand element shows at a time */
+    .power { display: none; }
+    .js .over-hero .power { display: inline-block; }
+    .js .over-hero .brand { display: none; }
+
+    .nav { display: flex; align-items: center; gap: 30px; margin-inline-start: auto; }
+    .nav a { font-size: 15px; font-weight: 500; color: inherit; }
+    .header-end { display: flex; align-items: center; gap: 14px; }
+
+    .lang-switch {
+      display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px;
+      background: #fff; box-shadow: 0 0 0 1px var(--line);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .lang-switch button {
+      min-width: 36px; min-height: 32px; padding: 4px 10px; border: 0; border-radius: 999px;
+      background: transparent; color: var(--text); font-family: var(--sans); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .lang-switch button:lang(fa) { font-family: var(--fa); }
+    .lang-switch button:hover { background: var(--blue-soft); }
+    .lang-switch button[aria-pressed="true"] { background: var(--primary); color: #fff; }
+    .js .over-hero .header-end .lang-switch { background: rgba(255, 255, 255, 0.12); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3); }
+    .js .over-hero .header-end .lang-switch button { color: #fff; }
+    .js .over-hero .header-end .lang-switch button:hover { background: rgba(255, 255, 255, 0.16); }
+    .js .over-hero .header-end .lang-switch button[aria-pressed="true"] { background: #fff; color: var(--primary); }
+    .nav-lang { display: none; }
+
+    .menu-toggle {
+      display: none; width: 44px; height: 44px; border: 0; border-radius: 12px;
+      background: transparent; color: inherit; cursor: pointer; place-items: center;
+    }
+    .menu-toggle:hover { background: var(--blue-soft); }
+    .js .over-hero .menu-toggle:hover { background: rgba(255, 255, 255, 0.14); }
+    .menu-toggle svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+    /* The wordmark is a power button (prompt) */
+    .power {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      font: inherit;
+      text-align: start;
+      cursor: pointer;
+      border-radius: 10px;
+      --lit: 0;
+    }
+    .power[disabled] { cursor: default; }
+    .wordmark {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(28px, 2.4vw, 40px);
+      line-height: 1;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .power-o {
+      display: inline-block;
+      width: 0.6em;
+      height: 0.744em;
+      margin-inline: 0.01em;
+      vertical-align: -0.06em;
+      transform-origin: 50% 61.6%;
+      transition: filter 0.25s ease, transform 0.15s ease;
+    }
+    .power-o svg { width: 100%; height: 100%; overflow: visible; }
+    .power-o .halo { opacity: var(--lit); }
+    .power:not([disabled]):hover .power-o { filter: drop-shadow(0 0 0.1em rgba(255, 255, 255, 0.95)) drop-shadow(0 0 0.32em rgba(255, 255, 255, 0.55)); }
+    .power:not([disabled]):active .power-o { transform: scale(0.94); }
+    .power.is-lit { animation: lit-fade 0.9s ease-out forwards; }
+    @keyframes lit-fade { from { --lit: 0.9; } to { --lit: 0; } }
+
+    /* ---------- Hero: the computer scene (moved up from the footer) ---------- */
+    .scene {
+      --ul: max(1.5px, calc(1.6 * var(--u)));
+      position: relative;
+      height: 100svh;
+      min-height: 620px;
+      overflow: hidden;
+      color: #fff;
+      background: #2C56A0;
+      isolation: isolate;
+    }
+    .scene-sky { display: none; }
+    .scene-media { position: absolute; inset: 0; z-index: 0; }
+    .scene-video { width: 100%; height: 100%; object-fit: cover; object-position: center bottom; }
+    .scene-tint {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        linear-gradient(to right, rgba(8, 20, 52, 0.55) 0%, rgba(8, 20, 52, 0.26) 40%, rgba(8, 20, 52, 0) 62%),
+        linear-gradient(to bottom, rgba(8, 20, 52, 0.5) 0%, rgba(8, 20, 52, 0) 38%);
+    }
+    [dir="rtl"] .scene-tint {
+      background:
+        linear-gradient(to left, rgba(8, 20, 52, 0.55) 0%, rgba(8, 20, 52, 0.26) 40%, rgba(8, 20, 52, 0) 62%),
+        linear-gradient(to bottom, rgba(8, 20, 52, 0.5) 0%, rgba(8, 20, 52, 0) 38%);
+    }
+    .scene-fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .scene-fx-under { z-index: 2; }
+    .scene-fx-over { z-index: 4; }
+
+    .hero-copy {
+      position: relative;
+      z-index: 3;
+      padding: calc(var(--header-h) + clamp(20px, 7vh, 80px)) var(--edge) 48px;
+    }
+    .hero-copy .eyebrow { color: rgba(255, 255, 255, 0.92); }
+    .hero-copy h1 {
+      margin: 18px 0 22px;
+      max-width: 3.8em;                                   /* "Turn AI / into Value" */
+      font-family: var(--serif);
+      font-size: min(clamp(56px, 7.4vw, 124px), 12.5vh);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 30px rgba(8, 20, 52, 0.35);
+    }
+    .hero-copy h1 .value { color: var(--accent); }
+    /* text column stays left of the computer at every desktop size */
+    .hero-copy .lead,
+    .hero-person { max-width: max(320px, calc(560 * var(--u))); }
+    .hero-copy .lead { font-size: clamp(17px, 1.35vw, 20px); color: rgba(255, 255, 255, 0.9); text-wrap: pretty; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; margin-top: 30px; }
+    .hero-link { display: inline-flex; align-items: center; gap: 8px; color: #fff; font-weight: 600; text-decoration: none; }
+    .hero-link .ulink { color: inherit; }
+    .hero-person { display: flex; align-items: center; gap: 12px; margin-top: 34px; color: rgba(255, 255, 255, 0.82); font-size: 14px; line-height: 1.45; }
+    .hero-person .logo-tile { width: 36px; height: 36px; border-radius: 10px; }
+    .hero-person strong { color: #fff; font-weight: 600; }
+
+    .scene .rise { transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); transition-delay: calc(var(--i, 0) * 60ms); }
+    .reveal-ready .scene:not(.is-arrived) .rise { opacity: 0; transform: translateY(calc(10 * var(--u))); }
+
+    .scene-pause {
+      position: absolute;
+      z-index: 5;
+      inset-inline-end: max(16px, calc(36 * var(--u)));
+      bottom: max(16px, env(safe-area-inset-bottom), calc(30 * var(--u)));
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(6, 14, 36, 0.35);
+      color: #fff;
+      cursor: pointer;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .scene-pause[hidden] { display: none; }
+    .scene-pause:hover { background: rgba(6, 14, 36, 0.6); border-color: rgba(255, 255, 255, 0.7); }
+    .scene-pause svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .scene-pause .i-play { display: none; fill: currentColor; stroke: none; }
+    .scene-pause[aria-pressed="true"] .i-pause { display: none; }
+    .scene-pause[aria-pressed="true"] .i-play { display: block; }
+
+    /* ---------- Positioning statement ---------- */
+    .statement { background: var(--primary); color: #fff; padding: clamp(64px, 9vw, 120px) 0; position: relative; overflow: clip; }
+    .statement::after {
+      content: ""; position: absolute; inset-inline-end: -120px; top: 50%; width: 420px; height: 420px;
+      transform: translateY(-50%); border-radius: 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.14);
+      box-shadow: 0 0 0 60px rgba(255, 255, 255, 0.03);
+      pointer-events: none;
+    }
+    .statement blockquote { margin: 0; position: relative; z-index: 1; }
+    .statement p {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.8vw, 54px);
+      line-height: 1.12;
+      max-width: 21em;
+      text-wrap: pretty;
+    }
+    .statement mark { background: none; color: var(--accent); }
+
+    /* ---------- Sections ---------- */
+    .section { padding: clamp(80px, 10vw, 140px) 0; }
+    .section-alt { background: linear-gradient(180deg, #EEF3FB 0%, var(--bg) 100%); }
+    .section-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 20px; }
+    .num { font-family: var(--serif); font-size: clamp(22px, 2vw, 28px); color: var(--accent-ink); line-height: 1; }
+    .section h2 {
+      font-family: var(--serif);
+      font-size: clamp(46px, 5.8vw, 80px);
+      line-height: 0.98;
+      letter-spacing: -0.015em;
+    }
+    .section-intro { font-size: clamp(18px, 1.5vw, 20px); color: var(--muted); max-width: 36em; margin-top: 10px; }
+    .sub-head {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.2vw, 44px);
+      line-height: 1.05;
+      margin: clamp(64px, 8vw, 104px) 0 28px;
+    }
+
+    .grid { display: grid; gap: 22px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .card-title { font-family: var(--serif); font-size: 28px; line-height: 1.1; margin-bottom: 10px; }
+    .card p { color: var(--muted); }
+    .card-rule { border-inline-start: 4px solid var(--complement); }
+    .card-top { border-top: 3px solid var(--accent); }
+
+    /* About */
+    .about-intro { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr); gap: 40px; align-items: start; margin-top: 36px; margin-bottom: 40px; }
+    .pitch { font-size: clamp(20px, 1.9vw, 25px); line-height: 1.55; color: var(--text); text-wrap: pretty; }
+    .person-card { display: flex; flex-direction: column; gap: 14px; }
+    .person-card .logo-tile { width: 64px; height: 64px; border-radius: 16px; }
+    .person-name { font-family: var(--serif); font-size: 32px; line-height: 1; }
+    .person-role { font-size: 15px; line-height: 1.5; color: var(--muted); }
+    .person-card a { color: var(--primary); font-weight: 600; font-size: 15px; align-self: flex-start; }
+
+    .voice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
+    .voice-item { padding: 26px 0; border-top: 1px solid var(--line); }
+    .voice-item h4 { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 30px; line-height: 1.1; margin-bottom: 8px; }
+    .voice-item h4::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--complement); box-shadow: 0 0 0 5px var(--blue-soft); flex-shrink: 0; }
+    .voice-item p { color: var(--muted); max-width: 32em; }
+
+    /* Services */
+    .service-card { display: flex; flex-direction: column; gap: 16px; }
+    .service-card .card-title { margin: 6px 0 0; }
+
+    .audience-card { display: flex; align-items: center; gap: 16px; padding: 22px; }
+    .audience-card p { color: var(--text); font-weight: 500; line-height: 1.4; }
+
+    .fit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .fit h4 { font-family: var(--serif); font-size: 30px; line-height: 1.1; margin-bottom: 18px; }
+    .fit ul { display: grid; gap: 14px; }
+    .fit li { display: flex; gap: 12px; align-items: flex-start; line-height: 1.5; }
+    .fit li svg { width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .fit-now li { color: var(--muted); }
+    .fit-now li svg { color: #94A3B8; }
+    .fit-gain { background: var(--primary); color: #fff; border-color: transparent; }
+    .fit-gain li svg { color: var(--accent); }
+
+    .message { display: flex; flex-direction: column; gap: 18px; padding: 30px; border-radius: 22px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .message .msg-num { font-family: var(--serif); font-size: 64px; line-height: 0.8; color: var(--accent-ink); }
+    .message p { font-family: var(--serif); font-size: clamp(24px, 2vw, 28px); line-height: 1.2; color: var(--text); }
+
+    /* Contact */
+    .contact {
+      padding: clamp(88px, 11vw, 150px) 0;
+      background:
+        radial-gradient(60% 80% at 85% 20%, rgba(245, 158, 11, 0.18), transparent 70%),
+        radial-gradient(50% 70% at 10% 90%, rgba(59, 130, 246, 0.12), transparent 70%),
+        linear-gradient(180deg, var(--bg), #FFF8EC);
+      text-align: center;
+    }
+    .contact .section-head { justify-content: center; }
+    .contact h2 {
+      font-family: var(--serif);
+      font-size: clamp(46px, 6.2vw, 88px);
+      line-height: 0.98;
+      letter-spacing: -0.015em;
+      max-width: 13em;
+      margin-inline: auto;
+    }
+    .contact-text { font-size: clamp(18px, 1.6vw, 21px); color: var(--muted); max-width: 34em; margin: 22px auto 0; }
+    .contact-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 22px; margin-top: 38px; }
+    .contact-actions .ulink { color: var(--primary); font-weight: 600; }
+
+    /* Gentle reveal on scroll; only when JS runs and motion is allowed */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal-ready .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+      .reveal-ready .reveal.in { opacity: 1; transform: none; }
+    }
+
+    /* ---------- Footer (plain; the scene now opens the page) ---------- */
+    .site-footer {
+      --ul: max(1px, calc(1.6 * var(--u)));
+      position: relative;
+      overflow: clip;
+      background: var(--primary);
+      color: #fff;
+      padding: clamp(64px, 8vw, 112px) 0 calc(clamp(40px, 5vw, 64px) + env(safe-area-inset-bottom));
+    }
+    .site-footer::after {
+      content: ""; position: absolute; inset-inline-end: -140px; bottom: -180px; width: 460px; height: 460px;
+      border-radius: 50%; border: 2px dashed rgba(255, 255, 255, 0.12); pointer-events: none;
+    }
+    .footer-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: max(250px, calc(528 * var(--u))) max(160px, calc(404 * var(--u))) max(160px, calc(404 * var(--u))) 1fr;
+      padding-inline: var(--edge);
+    }
+    .footer-wordmark { font-family: var(--serif); font-size: max(30px, calc(58 * var(--u))); line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
+    .footer-tagline { margin-top: max(16px, calc(26 * var(--u))); max-width: max(230px, calc(300 * var(--u))); font-size: max(14px, calc(19.5 * var(--u))); line-height: 1.5; color: rgba(255, 255, 255, 0.88); }
+    .footer-copy { margin-top: max(20px, calc(34 * var(--u))); font-size: max(12.5px, calc(17 * var(--u))); opacity: 0.75; }
+    .footer-col h2 { font-family: var(--serif); font-size: max(22px, calc(35 * var(--u))); line-height: 1; margin-bottom: max(18px, calc(40 * var(--u))); }
+    .footer-col ul { display: grid; gap: max(10px, calc(19 * var(--u))); justify-items: start; }
+    .footer-col a { font-size: max(14px, calc(19.5 * var(--u))); line-height: 1.3; color: rgba(255, 255, 255, 0.92); }
+    .footer-col a:hover { color: #fff; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal-ready .scene:not(.is-arrived) .rise { opacity: 1; transform: none; }
+      .scene .rise { transition: none; }
+      .ulink::after { transition: none; }
+      .site-header, .lang-switch { transition: none; }
+    }
+
+    /* ---------- Persian adjustments ---------- */
+    html[lang="fa"] body { line-height: 1.9; }
+    html[lang="fa"] :is(.section h2, .contact h2) { font-family: var(--fa); font-weight: 800; font-size: clamp(36px, 4.4vw, 60px); line-height: 1.3; letter-spacing: 0; }
+    html[lang="fa"] :is(.sub-head, .card-title, .voice-item h4, .fit h4, .footer-col h2) { font-family: var(--fa); font-weight: 700; letter-spacing: 0; line-height: 1.4; }
+    html[lang="fa"] .sub-head { font-size: clamp(26px, 2.6vw, 34px); }
+    html[lang="fa"] :is(.card-title, .voice-item h4, .fit h4) { font-size: 22px; }
+    html[lang="fa"] .statement p { font-family: var(--fa); font-weight: 700; font-size: clamp(24px, 2.8vw, 38px); line-height: 1.6; }
+    html[lang="fa"] .message p { font-family: var(--fa); font-weight: 600; font-size: 20px; line-height: 1.7; }
+    html[lang="fa"] .eyebrow { letter-spacing: 0.04em; }
+    html[lang="fa"] .hero-copy .lead { line-height: 1.9; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1080px) {
+      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 960px) {
+      .menu-toggle { display: grid; }
+      .nav {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        inset-inline: var(--gutter);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 22px;
+        color: var(--text);
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 0 0 1px var(--line), 0 24px 48px -24px rgba(15, 23, 42, 0.35);
+        overscroll-behavior: contain;
+      }
+      .nav.open { display: flex; }
+      .nav a { font-size: 17px; }
+      .header-end { margin-inline-start: auto; }
+      .header-inner { padding-inline: var(--gutter); }
+      .about-intro { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .fit { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      :root { --header-h: 68px; }
+      .header-cta { display: none; }
+      .header-end .lang-switch { display: none; }      /* moves into the menu panel */
+      .nav-lang { display: inline-flex; margin-top: 4px; }
+      .brand-name { font-size: 22px; }
+      .grid-2, .grid-4, .voice-grid { grid-template-columns: 1fr; }
+      .card { padding: 24px; }
+    }
+    @media (max-width: 360px) {
+      .brand-name { font-size: 19px; }
+      .wordmark { font-size: 26px; }
+    }
+
+    /* Hero scene and footer on phones (≤760px) */
+    @media (max-width: 760px) {
+      .scene {
+        height: auto;
+        min-height: 0;
+        padding-bottom: calc(170vw * 9 / 16 * 0.8);   /* about 80% of the clip's height */
+      }
+      .scene-sky { display: block; position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+      .sky-canvas { width: 100%; height: 100%; filter: blur(18px); transform: scale(1.25); }
+      .scene-media {
+        inset: auto;
+        left: 50%;
+        bottom: 0;
+        width: 170%;
+        aspect-ratio: 16 / 9;
+        transform: translateX(-50%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 26%);
+        mask-image: linear-gradient(to bottom, transparent 0, #000 26%);
+      }
+      .scene-video { object-position: center; }
+      .scene-tint, [dir="rtl"] .scene-tint { background: linear-gradient(to bottom, rgba(8, 20, 52, 0.45), rgba(8, 20, 52, 0.12) 60%, rgba(8, 20, 52, 0)); }
+      .hero-copy { padding: calc(var(--header-h) + 28px) var(--gutter) 0; }
+      .hero-copy h1 { font-size: clamp(50px, 15vw, 72px); max-width: none; }
+      .hero-copy .lead, .hero-person { max-width: none; }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 16px; }
+      .hero-actions .btn { width: 100%; }
+      .hero-link { justify-content: center; }
+
+      .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px; padding-inline: var(--gutter); }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-wordmark { font-size: clamp(34px, 10vw, 44px); }
+      .footer-tagline { max-width: 26em; font-size: 15px; }
+      .footer-copy { font-size: 13px; }
+      .footer-col h2 { font-size: 24px; margin-bottom: 16px; }
+      .footer-col a { font-size: 15px; }
+      .footer-col ul { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    BEL AI Consulting, version 4: same as version 3, but the computer scene from the footer now opens the page.
+    Content: everything public-facing from the brand guide. Style: fonts, scene and link behaviour from the
+    "power-button footer" prompt, in the brand colours.
+    English is the default and lives in this file; Persian and German are in the script at the end.
+  -->
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+  <!-- ================= Header ================= -->
+  <header class="site-header over-hero">
+    <div class="header-inner">
+      <!-- Over the scene: the wordmark is the power button -->
+      <button class="power" type="button" aria-pressed="true" aria-label="BEL AI Consulting, power switch" data-i18n-attr="aria-label:power.label">
+        <span class="wordmark" lang="en" dir="ltr" translate="no">BEL AI C<span class="power-o"><svg viewBox="0 0 50 62" fill="none" stroke="currentColor" stroke-width="4.6" stroke-linecap="round" aria-hidden="true">
+          <defs>
+            <filter id="halo-blur" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4.2"/></filter>
+            <filter id="halo-core" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.6"/></filter>
+          </defs>
+          <circle class="halo" cx="25" cy="38.2" r="19" stroke="#fff" stroke-width="11" filter="url(#halo-blur)"/>
+          <circle class="halo" cx="25" cy="38.2" r="19" stroke="#fff" stroke-width="6" filter="url(#halo-core)"/>
+          <path d="M14.2 22.6A19 19 0 1 0 35.8 22.6"/>
+          <path d="M25 6.5V33"/>
+        </svg></span>nsulting</span>
+      </button>
+      <!-- Past the scene: the logo and name -->
+      <a class="brand" href="#top" aria-label="BEL AI Consulting">
+        <span class="logo-tile"><img src="../assets/logo.jpg" alt="" width="44" height="44"></span>
+        <span class="brand-name" translate="no" lang="en" dir="ltr">BEL AI Consulting</span>
+      </a>
+
+      <nav id="site-nav" class="nav" aria-label="Main navigation" data-i18n-attr="aria-label:nav.label">
+        <a class="ulink" href="#about" data-i18n="nav.about">About Us</a>
+        <a class="ulink" href="#services" data-i18n="nav.services">Services</a>
+        <a class="ulink" href="#contact" data-i18n="nav.contact">Contact</a>
+        <div class="lang-switch nav-lang" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.label">
+          <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+          <button type="button" data-lang="fa" lang="fa" aria-label="فارسی" aria-pressed="false">فا</button>
+          <button type="button" data-lang="de" lang="de" aria-label="Deutsch" aria-pressed="false">DE</button>
+        </div>
+      </nav>
+
+      <div class="header-end">
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.label">
+          <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+          <button type="button" data-lang="fa" lang="fa" aria-label="فارسی" aria-pressed="false">فا</button>
+          <button type="button" data-lang="de" lang="de" aria-label="Deutsch" aria-pressed="false">DE</button>
+        </div>
+        <a class="btn btn-accent btn-sm header-cta" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="cta">Request a Consultation</a>
+        <button class="menu-toggle" type="button" aria-label="Menu" data-i18n-attr="aria-label:menu.label" aria-expanded="false" aria-controls="site-nav">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ================= Hero: the computer scene (brand guide p.6 tagline, p.3 USP) ================= -->
+    <section class="scene" id="top" data-state="idle" aria-labelledby="hero-title">
+      <div class="scene-sky" aria-hidden="true"><canvas class="sky-canvas" width="48" height="27"></canvas></div>
+      <div class="scene-media" aria-hidden="true">
+        <video class="scene-video" muted playsinline preload="auto" tabindex="-1" disablepictureinpicture disableremoteplayback
+          poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/af6deff1-d678-4dc6-ae24-2880b16cdb20.jpg"></video>
+      </div>
+      <div class="scene-tint" aria-hidden="true"></div>
+      <canvas class="scene-fx scene-fx-under" aria-hidden="true"></canvas>
+
+      <div class="hero-copy">
+        <span class="eyebrow rise" style="--i: 0" lang="en" dir="ltr" translate="no">AI Adoption · Digital Transformation · AI Consulting</span>
+        <h1 id="hero-title" class="rise" style="--i: 1" lang="en" translate="no">Turn AI into <span class="value">Value</span></h1>
+        <p class="lead rise" style="--i: 2" data-i18n="hero.lead">Instead of focusing on theory and the hype around AI, we focus on practical implementation and real results.</p>
+        <div class="hero-actions rise" style="--i: 3">
+          <a class="btn btn-accent" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="cta">Request a Consultation</a>
+          <a class="hero-link" href="#services">
+            <span class="ulink" data-i18n="hero.services">Explore Our Services</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="hero-person rise" style="--i: 4">
+          <span class="logo-tile"><img src="../assets/logo.jpg" alt="" width="36" height="36"></span>
+          <span lang="en" dir="ltr" translate="no"><strong>Nasrin Bel</strong> · AI Adoption Specialist &amp; Digital Transformation | AI Consultant</span>
+        </div>
+      </div>
+
+      <!-- WCAG 2.2.2: the twinkle and scanline loop while the scene is on screen, so they can be paused -->
+      <button class="scene-pause" type="button" aria-pressed="false" aria-label="Pause animation" data-i18n-attr="aria-label:pause.label">
+        <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>
+        <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+      </button>
+
+      <canvas class="scene-fx scene-fx-over" aria-hidden="true"></canvas>
+    </section>
+
+    <!-- ================= Positioning (brand guide p.3) ================= -->
+    <section class="statement" aria-label="Our positioning" data-i18n-attr="aria-label:statement.label">
+      <div class="container">
+        <blockquote class="reveal">
+          <p data-i18n="statement">We don’t talk about the latest AI tools; we show how you can <mark>work better with AI, make decisions faster, and have more time for valuable work.</mark></p>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ================= About us (brand guide p.1–3, p.6) ================= -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="num" aria-hidden="true" data-i18n="num.1">01</span>
+          <h2 id="about-title" data-i18n="about.title">About Us</h2>
+        </div>
+
+        <div class="about-intro reveal">
+          <p class="pitch" data-i18n="about.pitch">We help individuals and organizations turn AI from a complex, hype-filled topic into a practical tool for boosting productivity, improving decision-making, and creating real value. Drawing on our experience in technology, digital transformation, and corporate environments, we show people how to use AI in their daily work in a simple, effective, and results-driven way.</p>
+
+          <div class="card person-card">
+            <span class="logo-tile"><img src="../assets/logo.jpg" alt="BEL AI Consulting logo" data-i18n-attr="alt:logo.alt" width="64" height="64" loading="lazy"></span>
+            <div lang="en" dir="ltr" translate="no">
+              <p class="person-name">Nasrin Bel</p>
+              <p class="person-role">AI Adoption Specialist &amp; Digital Transformation | AI Consultant</p>
+            </div>
+            <a class="ulink" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="person.linkedin">Connect on LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="grid grid-2 reveal" id="mission">
+          <article class="card card-rule">
+            <h3 class="card-title" data-i18n="about.mission.title">Mission</h3>
+            <!-- Mission / Vision exist only in English in the brand guide; the Persian page keeps the English -->
+            <p lang="en" dir="ltr" data-fa-lang="en" data-i18n="about.mission.text">Helping professionals, leaders, and organizations leverage AI in their daily work to improve productivity and create sustainable competitive advantage through simple, practical, and actionable solutions.</p>
+          </article>
+          <article class="card card-rule">
+            <h3 class="card-title" data-i18n="about.vision.title">Vision</h3>
+            <p lang="en" dir="ltr" data-fa-lang="en" data-i18n="about.vision.text">To become a leading voice in AI Adoption and AI Consulting, empowering professionals, leaders, and organizations to unlock the full potential of AI through practical, human-centered, and results-driven solutions.</p>
+          </article>
+        </div>
+
+        <h3 class="sub-head reveal" id="values" data-i18n="values.title">Our Values</h3>
+        <div class="grid grid-4 reveal">
+          <article class="card card-top">
+            <h4 class="card-title" data-i18n="values.1.title">Pragmatism</h4>
+            <p data-i18n="values.1.text">We focus on results and outcomes, not just theoretical knowledge.</p>
+          </article>
+          <article class="card card-top">
+            <h4 class="card-title" data-i18n="values.2.title">Simplicity</h4>
+            <p data-i18n="values.2.text">Making topics complicated is not a sign of expertise; explaining them simply is.</p>
+          </article>
+          <article class="card card-top">
+            <h4 class="card-title" data-i18n="values.3.title">Continuous Learning</h4>
+            <p data-i18n="values.3.text">Personal and professional growth is an ongoing journey.</p>
+          </article>
+          <article class="card card-top">
+            <h4 class="card-title" data-i18n="values.4.title">Honesty</h4>
+            <p data-i18n="values.4.text">Trust is our most important asset.</p>
+          </article>
+        </div>
+
+        <!-- Brand voice (brand guide p.6), written as how we work with clients -->
+        <h3 class="sub-head reveal" id="approach" data-i18n="voice.title">How We Work</h3>
+        <div class="voice-grid reveal">
+          <div class="voice-item">
+            <h4 data-i18n="voice.1.title">Professional</h4>
+            <p data-i18n="voice.1.text">Our advice is based on experience, analysis, and real-world use. We avoid big, unsupported claims and focus on business value and results.</p>
+          </div>
+          <div class="voice-item">
+            <h4 data-i18n="voice.2.title">Simple &amp; Transparent</h4>
+            <p data-i18n="voice.2.text">We explain complex AI concepts in language managers and business owners understand, always with a focus on practical use.</p>
+          </div>
+          <div class="voice-item">
+            <h4 data-i18n="voice.3.title">Trustworthy</h4>
+            <p data-i18n="voice.3.text">We share information openly, honestly, and realistically. We talk about both the benefits and the limits of AI, so you can make an informed decision.</p>
+          </div>
+          <div class="voice-item">
+            <h4 data-i18n="voice.4.title">Inspiring</h4>
+            <p data-i18n="voice.4.text">Instead of dwelling on problems, we show opportunities and solutions. After working with us, you know your next step and feel ready to act.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Our services ================= -->
+    <section class="section section-alt" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="num" aria-hidden="true" data-i18n="num.2">02</span>
+          <h2 id="services-title" data-i18n="services.title">Our Services</h2>
+        </div>
+        <p class="section-intro reveal" data-i18n="services.intro">Simple, practical solutions with a focus on real business results.</p>
+
+        <!-- DRAFT / پیش‌نویس موقت: the brand guide has no list of services. These four were built from the
+             guide's own text (USP, key messages, audience needs) and match the current site. Replace with the real list. -->
+        <div class="grid grid-2 reveal" style="margin-top: 40px">
+          <article class="card service-card" id="service-adoption">
+            <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5"/></svg></div>
+            <h3 class="card-title" data-i18n="services.1.title">AI Adoption Consulting</h3>
+            <p data-i18n="services.1.text">Identifying the right problem and the right path for using AI in the daily work of individuals and teams.</p>
+          </article>
+          <article class="card service-card" id="service-transformation">
+            <div class="icon warm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 3.5 8 12 12.5 20.5 8z"/><path d="M3.5 12.5 12 17l8.5-4.5"/><path d="M3.5 16.5 12 21l8.5-4.5"/></svg></div>
+            <h3 class="card-title" data-i18n="services.2.title">Digital Transformation Support</h3>
+            <p data-i18n="services.2.text">Practical AI implementation with a focus on real business results.</p>
+          </article>
+          <article class="card service-card" id="service-training">
+            <div class="icon warm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></svg></div>
+            <h3 class="card-title" data-i18n="services.3.title">Practical AI Training</h3>
+            <p data-i18n="services.3.text">Simple and step by step for managers and teams, with no need for deep technical expertise.</p>
+          </article>
+          <article class="card service-card" id="service-productivity">
+            <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div>
+            <h3 class="card-title" data-i18n="services.4.title">Higher Productivity, Less Repetitive Work</h3>
+            <p data-i18n="services.4.text">Simple, practical solutions to save time and make faster, better decisions.</p>
+          </article>
+        </div>
+
+        <!-- Target audience (brand guide p.3) -->
+        <h3 class="sub-head reveal" id="audience" data-i18n="audience.title">Who We Work With</h3>
+        <ul class="grid grid-4 reveal">
+          <li class="card audience-card">
+            <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19.5h20"/></svg></div>
+            <p data-i18n="audience.1">Professionals and knowledge workers</p>
+          </li>
+          <li class="card audience-card">
+            <div class="icon warm"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.2" cy="9" r="2.4"/><path d="M16.4 13.6c2.7.4 4.6 2.8 4.6 5.9"/></svg></div>
+            <p data-i18n="audience.2">Middle managers</p>
+          </li>
+          <li class="card audience-card">
+            <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 10v9.5h15V10"/><path d="M3 10l2.2-5.5h13.6L21 10z"/><path d="M10 19.5v-5h4v5"/></svg></div>
+            <p data-i18n="audience.3">Owners of small and medium-sized businesses</p>
+          </li>
+          <li class="card audience-card">
+            <div class="icon warm"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></div>
+            <p data-i18n="audience.4">IT and digital transformation teams</p>
+          </li>
+        </ul>
+
+        <!-- Persona's concerns and needs (brand guide p.3), written to the visitor -->
+        <h3 class="sub-head reveal" data-i18n="fit.title">Sound Familiar?</h3>
+        <div class="fit reveal">
+          <div class="card fit-now">
+            <h4 data-i18n="fit.now.title">Where You Are Now</h4>
+            <ul>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg><span data-i18n="fit.now.1">Everyone is talking about AI, but you don’t know where to start.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg><span data-i18n="fit.now.2">Your team spends too much time on repetitive tasks.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg><span data-i18n="fit.now.3">You worry about falling behind competitors who already use AI.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg><span data-i18n="fit.now.4">You don’t have time to learn new tools.</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg><span data-i18n="fit.now.5">You don’t want to spend money and time on solutions that don’t pay off.</span></li>
+            </ul>
+          </div>
+          <div class="card fit-gain">
+            <h4 data-i18n="fit.gain.title">What We Help You Achieve</h4>
+            <ul>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="fit.gain.1">Simple, practical ways to make your team more productive</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="fit.gain.2">More time, less repetitive work</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="fit.gain.3">Faster, better decisions</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="fit.gain.4">Better use of AI, without deep technical expertise</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Key messages (brand guide p.7) -->
+        <h3 class="sub-head reveal" data-i18n="messages.title">What We Believe</h3>
+        <div class="grid grid-3 reveal">
+          <div class="message">
+            <span class="msg-num" aria-hidden="true" data-i18n="messages.1.num">1</span>
+            <p data-i18n="messages.1">AI is valuable when it leads to real business results.</p>
+          </div>
+          <div class="message">
+            <span class="msg-num" aria-hidden="true" data-i18n="messages.2.num">2</span>
+            <p data-i18n="messages.2">You don’t need to be a technology expert to use AI; you just need to know the right path.</p>
+          </div>
+          <div class="message">
+            <span class="msg-num" aria-hidden="true" data-i18n="messages.3.num">3</span>
+            <p data-i18n="messages.3">Every business can benefit from AI if it starts with the right problem.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Contact (brand guide p.8) ================= -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="num" aria-hidden="true" data-i18n="num.3">03</span>
+          <span class="eyebrow" data-i18n="nav.contact">Contact</span>
+        </div>
+        <h2 id="contact-title" class="reveal" data-i18n="contact.title">Turning Ideas into Value with AI</h2>
+        <p class="contact-text reveal" data-i18n="contact.question">Tell us where your team loses the most time — we’ll help you find the right place to start.</p>
+        <div class="contact-actions reveal">
+          <a class="btn btn-accent" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="cta">Request a Consultation</a>
+          <a class="ulink" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" lang="en" dir="ltr" translate="no">linkedin.com/in/nasrin-bel-654ba9109</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-wordmark" lang="en" dir="ltr" translate="no">BEL AI Consulting</p>
+        <p class="footer-tagline" data-i18n="footer.tagline">Practical AI consulting for managers and businesses. Turn AI into Value.</p>
+        <p class="footer-copy" data-i18n="footer.copy">© 2026 BEL AI Consulting. All rights reserved.</p>
+      </div>
+      <nav class="footer-col" aria-labelledby="fcol-services">
+        <h2 id="fcol-services" data-i18n="footer.col.services">Services</h2>
+        <ul>
+          <li><a class="ulink" href="#service-adoption" data-i18n="footer.s1">AI Adoption</a></li>
+          <li><a class="ulink" href="#service-transformation" data-i18n="footer.s2">Digital Transformation</a></li>
+          <li><a class="ulink" href="#service-training" data-i18n="footer.s3">AI Training</a></li>
+          <li><a class="ulink" href="#service-productivity" data-i18n="footer.s4">Productivity</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-labelledby="fcol-about">
+        <h2 id="fcol-about" data-i18n="footer.col.about">About</h2>
+        <ul>
+          <li><a class="ulink" href="#about" data-i18n="nav.about">About Us</a></li>
+          <li><a class="ulink" href="#mission" data-i18n="footer.a2">Mission &amp; Vision</a></li>
+          <li><a class="ulink" href="#values" data-i18n="values.title">Our Values</a></li>
+          <li><a class="ulink" href="#approach" data-i18n="voice.title">How We Work</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-labelledby="fcol-connect">
+        <h2 id="fcol-connect" data-i18n="footer.col.connect">Connect</h2>
+        <ul>
+          <li><a class="ulink" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" lang="en" translate="no">LinkedIn</a></li>
+          <li><a class="ulink" href="https://uk.linkedin.com/in/nasrin-bel-654ba9109/" target="_blank" rel="noopener" data-i18n="cta">Request a Consultation</a></li>
+          <li><a class="ulink" href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    /* =========================================================
+       Header: menu (phones and tablets) and its two looks
+       ========================================================= */
+    (function () {
+      var header = document.querySelector('.site-header');
+      var toggle = header.querySelector('.menu-toggle');
+      var nav = document.getElementById('site-nav');
+      function setOpen(open) {
+        nav.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      toggle.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
+      nav.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) { setOpen(false); toggle.focus(); }
+      });
+
+      // Transparent with the power wordmark while the scene is under the header; a solid bar after it
+      var hero = document.getElementById('top');
+      if (!('IntersectionObserver' in window)) { header.classList.remove('over-hero'); return; }
+      var bandIO = null, resizeTimer = 0;
+      function watchHero() {
+        if (bandIO) bandIO.disconnect();
+        var band = header.offsetHeight;
+        bandIO = new IntersectionObserver(function (entries) {
+          header.classList.toggle('over-hero', entries[0].isIntersecting);
+        }, { rootMargin: '0px 0px ' + (band - window.innerHeight) + 'px 0px' });
+        bandIO.observe(hero);
+      }
+      watchHero();
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(watchHero, 150);
+      }, { passive: true });
+    })();
+
+    /* =========================================================
+       Reveal sections as they scroll into view
+       ========================================================= */
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    })();
+
+    /* =========================================================
+       Hero scene: the header wordmark is a power button.
+       One explicit state drives everything (no pile of on/off flags):
+         idle → switchingOn → online ⇄ switchingOff → offline → switchingOn …
+       The UI reads data-state / aria-pressed; only this module changes them.
+       ========================================================= */
+    (function () {
+      var scene = document.getElementById('top');
+      var video = scene.querySelector('.scene-video');
+      var power = document.querySelector('.site-header .power');
+      var powerO = power.querySelector('.power-o');
+      var under = scene.querySelector('.scene-fx-under');
+      var over = scene.querySelector('.scene-fx-over');
+      var sky = scene.querySelector('.sky-canvas');
+      var pauseBtn = scene.querySelector('.scene-pause');
+      var underCtx = under.getContext('2d');
+      var overCtx = over.getContext('2d');
+      var skyCtx = sky.getContext('2d');
+
+      var SRC_1080 = 'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/abdab52e-bb1b-477d-ae7c-26c5f8915433.mp4';
+      var SRC_720 = 'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/15017aa7-135b-471f-a8a1-42a208bc61b2.mp4';
+      var POSTER = video.getAttribute('poster');
+
+      // Clip geometry and timeline (1920×1080 frame)
+      var FRAME_W = 1920, FRAME_H = 1080;
+      var SCREEN = { x0: 806, y0: 505, x1: 1077, y1: 724 };
+      var LAST_LIGHT = { x: 945, y: 594 };
+      var T_ON = 0.6, T_IDLE = 2.3, T_DUSK = 2.7, T_NIGHT = 4.4, T_DOT = 4.72;
+      var FLIGHT_MS = 780;
+      var SKY_ROWS = 0.16;            // top part of the frame used to paint the phone sky
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var phoneMQ = window.matchMedia('(max-width: 760px)');
+      var smallMQ = window.matchMedia('(max-width: 900px)');
+
+      var state = 'idle';
+      var arrived = false, srcSet = false, inView = false, dotLaunched = false, motionPaused = false;
+      var flight = null, raf = 0, markTimer = 0, retries = 0, lastSkyTime = -1;
+      var layout = { w: 0, h: 0, dpr: 1, s: 1, ox: 0, oy: 0, phone: false };
+      var glints = [];
+
+      function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+      function rand(a, b) { return a + Math.random() * (b - a); }
+
+      /* ---------- state ---------- */
+      function setState(next) {
+        state = next;
+        scene.dataset.state = next;
+        power.setAttribute('aria-pressed', (next === 'switchingOff' || next === 'offline') ? 'false' : 'true');
+        startLoop();
+      }
+
+      /* ---------- layout: map clip-frame points onto the scene ---------- */
+      function measure(w, h) {
+        layout.w = w;
+        layout.h = h;
+        layout.dpr = Math.min(window.devicePixelRatio || 1, 2);
+        layout.phone = phoneMQ.matches;
+        if (layout.phone) {
+          var clipW = w * 1.7;                       // clip sits at the bottom, 170% wide, centred
+          layout.s = clipW / FRAME_W;
+          layout.ox = (w - clipW) / 2;
+          layout.oy = h - clipW * 9 / 16;
+        } else {                                     // object-fit: cover; object-position: center bottom
+          layout.s = Math.max(w / FRAME_W, h / FRAME_H);
+          layout.ox = (w - FRAME_W * layout.s) / 2;
+          layout.oy = h - FRAME_H * layout.s;
+        }
+        [under, over].forEach(function (c) {
+          c.width = Math.round(w * layout.dpr);
+          c.height = Math.round(h * layout.dpr);
+        });
+        seedGlints();
+        if (reduceMotion || video.readyState < 2) paintSkyFromPoster();
+        startLoop();
+      }
+      function map(fx, fy) { return { x: layout.ox + fx * layout.s, y: layout.oy + fy * layout.s }; }
+
+      /* ---------- sky glints (four-point stars) ---------- */
+      function seedGlints() {
+        glints = [];
+        var top = layout.h * 0.04;
+        var bottom = Math.max(top + 40, map(0, 455).y);
+        for (var i = 0; i < 22; i++) {
+          glints.push({
+            x: rand(0.02, 0.98) * layout.w,
+            y: rand(top, bottom),
+            size: rand(2.6, 5.8),
+            period: rand(1600, 3600),
+            phase: rand(0, Math.PI * 2),
+            i: i
+          });
+        }
+      }
+      function nightProgress(t) {
+        if (state === 'offline') return 1;
+        if (state !== 'switchingOff') return 0;
+        return clamp((t - T_DUSK) / (T_NIGHT - T_DUSK), 0, 1);
+      }
+      function drawGlints(ctx, now, t) {
+        var count = 10 + 12 * nightProgress(t);      // ~10 by day, ~22 at night
+        for (var k = 0; k < glints.length; k++) {
+          var g = glints[k];
+          var presence = clamp(count - g.i, 0, 1);
+          if (presence <= 0) continue;
+          var tw = Math.sin(g.phase + (now / g.period) * Math.PI * 2);
+          var a = Math.pow(Math.max(0, tw), 3) * presence;
+          if (a < 0.02) continue;
+          var r = g.size * (0.65 + 0.35 * a);
+          ctx.globalAlpha = a;
+          var halo = ctx.createRadialGradient(g.x, g.y, 0, g.x, g.y, r * 2.4);
+          halo.addColorStop(0, 'rgba(255,255,255,0.55)');
+          halo.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = halo;
+          ctx.beginPath(); ctx.arc(g.x, g.y, r * 2.4, 0, Math.PI * 2); ctx.fill();
+          var arm = r * 1.7, w = r * 0.2;
+          ctx.fillStyle = '#fff';
+          ctx.beginPath();
+          ctx.moveTo(g.x, g.y - arm); ctx.lineTo(g.x + w, g.y - w);
+          ctx.lineTo(g.x + arm, g.y); ctx.lineTo(g.x + w, g.y + w);
+          ctx.lineTo(g.x, g.y + arm); ctx.lineTo(g.x - w, g.y + w);
+          ctx.lineTo(g.x - arm, g.y); ctx.lineTo(g.x - w, g.y - w);
+          ctx.closePath(); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      /* ---------- CRT scanline, clipped to the screen glass ---------- */
+      function drawScanline(ctx, now) {
+        var a = map(SCREEN.x0, SCREEN.y0), b = map(SCREEN.x1, SCREEN.y1);
+        var w = b.x - a.x, h = b.y - a.y, band = 52 * layout.s;
+        var p = (now % 1800) / 1800;
+        var y = a.y - band + p * (h + band);
+        var flicker = 0.86 + 0.14 * Math.sin(now * 0.051) * Math.sin(now * 0.017);
+        ctx.save();
+        ctx.beginPath(); ctx.rect(a.x, a.y, w, h); ctx.clip();
+        var grad = ctx.createLinearGradient(0, y, 0, y + band);
+        grad.addColorStop(0, 'rgba(255,255,255,0)');
+        grad.addColorStop(0.5, 'rgba(255,255,255,' + (0.10 * flicker).toFixed(3) + ')');
+        grad.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(a.x, y, w, band);
+        ctx.fillStyle = 'rgba(255,255,255,' + (0.025 * (1 - flicker) * 5).toFixed(3) + ')';
+        ctx.fillRect(a.x, a.y, w, h);
+        ctx.restore();
+      }
+
+      /* ---------- the last point of light flies up into the power-o in the header ---------- */
+      function launchDot() {
+        var or = powerO.getBoundingClientRect();
+        if (!or.width) return;                       // header already switched to its solid look: no target
+        var sr = scene.getBoundingClientRect();
+        var p0 = map(LAST_LIGHT.x, LAST_LIGHT.y);
+        var p2 = { x: or.left - sr.left + or.width * 0.5, y: or.top - sr.top + or.height * 0.616 };
+        var p1 = { x: p0.x + (p2.x - p0.x) * 0.22, y: Math.min(p0.y, p2.y) - layout.h * 0.08 };
+        flight = { start: performance.now(), p0: p0, p1: p1, p2: p2 };
+        startLoop();
+      }
+      function drawFlight(ctx, now) {
+        if (!flight) return;
+        var t = clamp((now - flight.start) / FLIGHT_MS, 0, 1);
+        var e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;   // cubic in-out
+        var u = 1 - e;
+        var x = u * u * flight.p0.x + 2 * u * e * flight.p1.x + e * e * flight.p2.x;
+        var y = u * u * flight.p0.y + 2 * u * e * flight.p1.y + e * e * flight.p2.y;
+        var base = clamp(3.2 * layout.w / 1440, 2.2, 4.2);
+        var r = base * (0.75 + 1.5 * Math.sin(Math.PI * t));               // grows, then shrinks
+        var bloom = ctx.createRadialGradient(x, y, 0, x, y, r * 6);
+        bloom.addColorStop(0, 'rgba(255,255,255,0.75)');
+        bloom.addColorStop(0.35, 'rgba(255,255,255,0.22)');
+        bloom.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = bloom;
+        ctx.beginPath(); ctx.arc(x, y, r * 6, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+        if (t >= 1) { flight = null; land(); }
+      }
+      function land() {
+        power.classList.remove('is-lit');
+        requestAnimationFrame(function () { power.classList.add('is-lit'); });
+      }
+      power.addEventListener('animationend', function () { power.classList.remove('is-lit'); });
+
+      /* ---------- phone sky: the clip's top rows, blurred and stretched ---------- */
+      var posterImg = new Image();
+      posterImg.decoding = 'async';
+      posterImg.onload = paintSkyFromPoster;
+      posterImg.src = POSTER;
+      function paintSkyFromPoster() {
+        if (!layout.phone || !posterImg.complete || !posterImg.naturalWidth) return;
+        skyCtx.drawImage(posterImg, 0, 0, posterImg.naturalWidth, posterImg.naturalHeight * SKY_ROWS, 0, 0, sky.width, sky.height);
+      }
+      function paintSkyFromVideo() {
+        if (!layout.phone || video.readyState < 2 || !video.videoWidth) return;
+        if (video.currentTime === lastSkyTime) return;            // paused clip: the sky hasn't changed
+        lastSkyTime = video.currentTime;
+        skyCtx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight * SKY_ROWS, 0, 0, sky.width, sky.height);
+      }
+
+      /* ---------- pause control for the looping twinkle and scanline ---------- */
+      pauseBtn.addEventListener('click', function () {
+        motionPaused = !motionPaused;
+        pauseBtn.setAttribute('aria-pressed', motionPaused ? 'true' : 'false');
+        if (motionPaused) {
+          underCtx.setTransform(1, 0, 0, 1, 0, 0);
+          underCtx.clearRect(0, 0, under.width, under.height);
+        }
+        startLoop();
+      });
+
+      /* ---------- render loop: runs only while needed ---------- */
+      function needsLoop() {
+        if (reduceMotion) return false;
+        if (state === 'switchingOn' || state === 'switchingOff' || flight) return true;
+        return inView && !motionPaused;
+      }
+      function startLoop() { if (!raf && needsLoop() && layout.w) raf = requestAnimationFrame(tick); }
+
+      /* Clip marks (pause at 2.3 s, launch the dot at 4.72 s). Checked every frame AND by a timer aimed
+         at the mark, so a slow or throttled frame rate can't make the scene miss them. */
+      function checkMarks() {
+        var t = video.currentTime || 0;
+        if (state === 'switchingOn' && t >= T_IDLE) {
+          video.pause();
+          if (t > T_DUSK - 0.1) video.currentTime = T_IDLE;   // very late (frozen tab): cut back to the colour bars
+          setState('online');
+        }
+        if (state === 'switchingOff' && !dotLaunched && t >= T_DOT) { dotLaunched = true; launchDot(); }
+      }
+      function armMarkTimer() {
+        clearTimeout(markTimer);
+        if (video.paused) return;
+        var mark = state === 'switchingOn' ? T_IDLE : (state === 'switchingOff' && !dotLaunched ? T_DOT : -1);
+        if (mark < 0) return;
+        var wait = (mark - (video.currentTime || 0)) * 1000 / (video.playbackRate || 1);
+        markTimer = setTimeout(function () {
+          checkMarks();
+          armMarkTimer();
+        }, Math.max(4, Math.min(wait - 15, 250)));
+      }
+      video.addEventListener('playing', armMarkTimer);
+
+      function tick(now) {
+        raf = 0;
+        var t = video.currentTime || 0;
+        checkMarks();
+
+        var d = layout.dpr;
+        underCtx.setTransform(d, 0, 0, d, 0, 0);
+        underCtx.clearRect(0, 0, layout.w, layout.h);
+        if (!motionPaused) {
+          drawGlints(underCtx, now, t);
+          if (state === 'online') drawScanline(underCtx, now);
+        }
+
+        overCtx.setTransform(d, 0, 0, d, 0, 0);
+        overCtx.clearRect(0, 0, layout.w, layout.h);
+        drawFlight(overCtx, now);
+
+        paintSkyFromVideo();
+
+        if (needsLoop()) raf = requestAnimationFrame(tick);
+      }
+
+      /* ---------- video ---------- */
+      function loadVideo() {
+        if (srcSet || reduceMotion) return;
+        srcSet = true;
+        video.muted = true;
+        video.src = smallMQ.matches ? SRC_720 : SRC_1080;
+        video.load();
+      }
+      /* If the browser refuses to play (low-power mode, a hiccup), retry a few times
+         and again on the visitor's first tap or key press. */
+      function blocked() {
+        setState('blocked');
+        if (retries < 3) {
+          retries++;
+          setTimeout(function () { if (state === 'blocked') switchOn(); }, 1000 * retries);
+        }
+      }
+      function retryOnGesture() { if (state === 'blocked') switchOn(); }
+      document.addEventListener('pointerdown', retryOnGesture, { passive: true });
+      document.addEventListener('keydown', retryOnGesture);
+
+      function seekThenPlay(time) {
+        function go() {
+          try { video.currentTime = time; } catch (err) { /* not seekable yet */ }
+          video.muted = true;
+          var p = video.play();
+          if (p && p.then) p.then(function () { retries = 0; }, blocked);
+        }
+        if (video.readyState >= 1) go(); else video.addEventListener('loadedmetadata', go, { once: true });
+      }
+      function switchOn() {
+        loadVideo();
+        dotLaunched = false;
+        setState('switchingOn');
+        seekThenPlay(T_ON);                      // cut to 0.6 s, replay the switch-on, pause at 2.3 s
+      }
+      function switchOff() {
+        dotLaunched = false;
+        setState('switchingOff');
+        var p = video.play();                    // 2.3 s → end at 1×: dusk, night, CRT collapse
+        if (p && p.catch) p.catch(blocked);
+      }
+      video.addEventListener('ended', function () {
+        if (state !== 'switchingOff') return;
+        if (!dotLaunched) { dotLaunched = true; launchDot(); }       // never skip the light's flight
+        setState('offline');
+      });
+
+      power.addEventListener('click', function () {
+        if (reduceMotion) return;
+        if (state === 'online') switchOff();
+        else if (state === 'switchingOn') { setState('switchingOff'); armMarkTimer(); }   // keep playing straight through to night
+        else if (state === 'offline' || state === 'idle' || state === 'blocked') switchOn();
+        // switchingOff: clicks are ignored
+      });
+
+      /* ---------- arrival: the scene opens the page, so this happens on load ---------- */
+      function arrive() {
+        if (arrived) return;
+        arrived = true;
+        scene.classList.add('is-arrived');
+        if (!reduceMotion) switchOn();
+      }
+
+      if (reduceMotion) {
+        power.disabled = true;                   // no video, no motion: the scene stays a still
+        pauseBtn.hidden = true;                  // nothing moves, so nothing to pause
+        scene.classList.add('is-arrived');
+      } else {
+        loadVideo();
+      }
+
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(function (entries) {
+          var box = entries[0].contentRect;
+          measure(box.width, box.height);
+        }).observe(scene);
+      } else {
+        measure(scene.clientWidth, scene.clientHeight);
+      }
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          var e = entries[0];
+          inView = e.isIntersecting;
+          if (e.intersectionRatio >= 0.35 || e.intersectionRect.height >= window.innerHeight * 0.35) arrive();
+          startLoop();
+        }, { threshold: [0, 0.1, 0.2, 0.35, 0.5] }).observe(scene);
+      } else {
+        inView = true;
+        arrive();
+      }
+    })();
+
+    /* =========================================================
+       Languages: en (default, in the HTML above) / fa / de
+       Persian and German text from the current site (i18n.js) plus new lines for this version.
+       The choice is shared with the other versions of the site.
+       ========================================================= */
+    (function () {
+      var DEFAULT_LANG = 'en';
+      var LANGS = ['en', 'fa', 'de'];
+      var DIR = { en: 'ltr', fa: 'rtl', de: 'ltr' };
+      var STORAGE_KEY = 'bel-site-lang';
+      var LINKEDIN_HOST = { en: 'uk.linkedin.com', de: 'de.linkedin.com', fa: 'ir.linkedin.com' };
+
+      var T = {
+        fa: {
+          'meta.description': 'مشاوره هوش مصنوعی برای مدیران و کسب‌وکارها — BEL AI Consulting',
+          'skip': 'رفتن به محتوا',
+          'logo.alt': 'لوگوی BEL AI Consulting',
+          'nav.label': 'منوی اصلی',
+          'menu.label': 'منو',
+          'lang.label': 'زبان',
+          'nav.about': 'درباره‌ی ما',
+          'nav.services': 'خدمات',
+          'nav.contact': 'تماس',
+          'cta': 'درخواست مشاوره',
+          'hero.lead': 'به جای تمرکز بر تئوری و هیاهوی پیرامون AI، روی پیاده‌سازی عملی و نتایج واقعی تمرکز می‌کنیم.',
+          'hero.services': 'خدمات ما را ببینید',
+          'statement.label': 'جایگاه ما',
+          'statement': 'ما درباره آخرین ابزارهای AI صحبت نمی‌کنیم؛ نشان می‌دهیم چگونه می‌توان <mark>با AI بهتر کار کرد، سریع‌تر تصمیم گرفت و زمان بیشتری برای کارهای ارزشمند داشت.</mark>',
+          'num.1': '۰۱', 'num.2': '۰۲', 'num.3': '۰۳',
+          'about.title': 'درباره‌ی ما',
+          'about.pitch': 'به افراد و سازمان‌ها کمک می‌کنیم هوش مصنوعی را از یک موضوع پیچیده و پر از هیاهو به ابزاری عملی برای افزایش بهره‌وری، بهبود تصمیم‌گیری و خلق ارزش واقعی تبدیل کنند. با تکیه بر تجربه‌مان در فناوری، تحول دیجیتال و محیط‌های سازمانی، به افراد نشان می‌دهیم چگونه از AI در کار روزمره خود به شکلی ساده، مؤثر و نتیجه‌محور استفاده کنند.',
+          'person.linkedin': 'ارتباط در لینکدین',
+          'about.mission.title': 'مأموریت',
+          'about.vision.title': 'چشم‌انداز',
+          'values.title': 'ارزش‌های ما',
+          'values.1.title': 'عمل‌گرایی',
+          'values.1.text': 'روی نتیجه و خروجی تمرکز می‌کنیم، نه صرفاً دانش تئوری.',
+          'values.2.title': 'سادگی',
+          'values.2.text': 'پیچیده کردن موضوعات نشانه تخصص نیست؛ ساده توضیح دادن آن‌هاست.',
+          'values.3.title': 'یادگیری مستمر',
+          'values.3.text': 'رشد فردی و حرفه‌ای یک مسیر دائمی است.',
+          'values.4.title': 'صداقت',
+          'values.4.text': 'اعتماد مهم‌ترین دارایی ماست.',
+          'voice.title': 'چطور کار می‌کنیم',
+          'voice.1.title': 'حرفه‌ای',
+          'voice.1.text': 'توصیه‌های ما بر پایه‌ی تجربه، تحلیل و کاربرد واقعی است. از ادعاهای بزرگ و بی‌پشتوانه پرهیز می‌کنیم و روی ارزش کسب‌وکار و نتیجه تمرکز داریم.',
+          'voice.2.title': 'ساده و شفاف',
+          'voice.2.text': 'مفاهیم پیچیده‌ی هوش مصنوعی را به زبانی قابل‌فهم برای مدیران و صاحبان کسب‌وکار توضیح می‌دهیم و همیشه روی کاربرد عملی تمرکز می‌کنیم.',
+          'voice.3.title': 'قابل‌اعتماد',
+          'voice.3.text': 'اطلاعات را شفاف، صادقانه و واقع‌بینانه ارائه می‌کنیم. هم مزایا و هم محدودیت‌های هوش مصنوعی را می‌گوییم تا بتوانید تصمیم آگاهانه بگیرید.',
+          'voice.4.title': 'الهام‌بخش',
+          'voice.4.text': 'به جای تمرکز بر مشکلات، فرصت‌ها و راه‌حل‌ها را نشان می‌دهیم. بعد از همکاری با ما می‌دانید قدم بعدی چیست و می‌توانید اقدام کنید.',
+          'services.title': 'خدمات ما',
+          'services.intro': 'راهکارهای ساده و عملی با تمرکز بر نتایج واقعی کسب‌وکار.',
+          'services.1.title': 'مشاوره‌ی پذیرش هوش مصنوعی',
+          'services.1.text': 'شناسایی مسئله‌ی درست و مسیر درست برای استفاده از AI در کار روزمره‌ی افراد و تیم‌ها.',
+          'services.2.title': 'همراهی در تحول دیجیتال',
+          'services.2.text': 'پیاده‌سازی عملی AI با تمرکز بر نتایج واقعی کسب‌وکار.',
+          'services.3.title': 'آموزش کاربردی هوش مصنوعی',
+          'services.3.text': 'ساده و گام‌به‌گام برای مدیران و تیم‌ها، بدون نیاز به تخصص فنی عمیق.',
+          'services.4.title': 'افزایش بهره‌وری و کاهش کارهای تکراری',
+          'services.4.text': 'راهکارهای ساده و عملی برای صرفه‌جویی در زمان و تصمیم‌گیری سریع‌تر و بهتر.',
+          'audience.title': 'با چه کسانی کار می‌کنیم',
+          'audience.1': 'متخصصان و کارمندان دانشی',
+          'audience.2': 'مدیران میانی',
+          'audience.3': 'صاحبان کسب‌وکارهای کوچک و متوسط',
+          'audience.4': 'تیم‌های IT و تحول دیجیتال',
+          'fit.title': 'این‌ها برایتان آشناست؟',
+          'fit.now.title': 'جایی که الان هستید',
+          'fit.now.1': 'همه درباره‌ی AI صحبت می‌کنند، اما نمی‌دانید از کجا شروع کنید.',
+          'fit.now.2': 'همکارانتان زمان زیادی صرف کارهای تکراری می‌کنند.',
+          'fit.now.3': 'نگرانید در استفاده از AI از رقبا عقب بمانید.',
+          'fit.now.4': 'وقت کافی برای یادگیری ابزارهای جدید ندارید.',
+          'fit.now.5': 'نمی‌خواهید هزینه و زمانتان را روی راهکارهای بی‌فایده هدر دهید.',
+          'fit.gain.title': 'در چه چیزی کمکتان می‌کنیم',
+          'fit.gain.1': 'راهکارهای ساده و عملی برای افزایش بهره‌وری تیم',
+          'fit.gain.2': 'صرفه‌جویی در زمان و کاهش کارهای تکراری',
+          'fit.gain.3': 'تصمیم‌گیری سریع‌تر و بهتر',
+          'fit.gain.4': 'استفاده‌ی بهتر از AI بدون نیاز به تخصص فنی عمیق',
+          'messages.title': 'باور ما',
+          'messages.1': 'هوش مصنوعی زمانی ارزشمند است که به نتایج واقعی کسب‌وکار منجر شود.',
+          'messages.2': 'برای استفاده از هوش مصنوعی، نیازی نیست متخصص فناوری باشید؛ کافی است مسیر درست را بشناسید.',
+          'messages.3': 'هر کسب‌وکار می‌تواند از هوش مصنوعی بهره ببرد، اگر از مسئله درست شروع کند.',
+          'messages.1.num': '۱', 'messages.2.num': '۲', 'messages.3.num': '۳',
+          'contact.title': 'تبدیل ایده‌ها به ارزش با AI',
+          'contact.question': 'بگویید تیمتان بیشترین زمان را کجا از دست می‌دهد؛ کمکتان می‌کنیم نقطه‌ی درست شروع را پیدا کنید.',
+          'power.label': 'BEL AI Consulting، کلید روشن و خاموش صحنه',
+          'pause.label': 'توقف انیمیشن',
+          'footer.tagline': 'مشاوره‌ی کاربردی هوش مصنوعی برای مدیران و کسب‌وکارها.',
+          'footer.copy': '© ۲۰۲۶ BEL AI Consulting. همه‌ی حقوق محفوظ است.',
+          'footer.col.services': 'خدمات',
+          'footer.s1': 'پذیرش هوش مصنوعی',
+          'footer.s2': 'تحول دیجیتال',
+          'footer.s3': 'آموزش هوش مصنوعی',
+          'footer.s4': 'بهره‌وری',
+          'footer.col.about': 'درباره',
+          'footer.a2': 'مأموریت و چشم‌انداز',
+          'footer.col.connect': 'ارتباط'
+        },
+        de: {
+          'meta.description': 'KI-Beratung für Führungskräfte und Unternehmen — BEL AI Consulting',
+          'skip': 'Zum Inhalt springen',
+          'logo.alt': 'Logo von BEL AI Consulting',
+          'nav.label': 'Hauptnavigation',
+          'menu.label': 'Menü',
+          'lang.label': 'Sprache',
+          'nav.about': 'Über uns',
+          'nav.services': 'Leistungen',
+          'nav.contact': 'Kontakt',
+          'cta': 'Beratung anfragen',
+          'hero.lead': 'Statt uns auf Theorie und den Hype rund um KI zu konzentrieren, setzen wir auf praktische Umsetzung und echte Ergebnisse.',
+          'hero.services': 'Unsere Leistungen ansehen',
+          'statement.label': 'Unsere Positionierung',
+          'statement': 'Wir sprechen nicht über die neuesten KI-Tools – wir zeigen, wie man <mark>mit KI besser arbeitet, schneller entscheidet und mehr Zeit für wertvolle Aufgaben gewinnt.</mark>',
+          'about.title': 'Über uns',
+          'about.pitch': 'Wir helfen Menschen und Organisationen, KI von einem komplexen, von Hype geprägten Thema in ein praktisches Werkzeug zu verwandeln – für mehr Produktivität, bessere Entscheidungen und echten Mehrwert. Gestützt auf unsere Erfahrung in Technologie, digitaler Transformation und Unternehmensumfeldern zeigen wir, wie man KI einfach, wirksam und ergebnisorientiert im Arbeitsalltag einsetzt.',
+          'person.linkedin': 'Auf LinkedIn vernetzen',
+          'about.mission.title': 'Mission',
+          'about.mission.text': 'Fachkräfte, Führungskräfte und Organisationen dabei unterstützen, KI in ihrer täglichen Arbeit zu nutzen, um ihre Produktivität zu steigern und durch einfache, praktische und umsetzbare Lösungen nachhaltige Wettbewerbsvorteile zu schaffen.',
+          'about.vision.title': 'Vision',
+          'about.vision.text': 'Eine führende Stimme für KI-Einführung und KI-Beratung zu werden und Fachkräfte, Führungskräfte und Organisationen zu befähigen, das volle Potenzial von KI durch praktische, menschenzentrierte und ergebnisorientierte Lösungen zu nutzen.',
+          'values.title': 'Unsere Werte',
+          'values.1.title': 'Pragmatismus',
+          'values.1.text': 'Wir konzentrieren uns auf Ergebnisse und Wirkung, nicht nur auf theoretisches Wissen.',
+          'values.2.title': 'Einfachheit',
+          'values.2.text': 'Themen kompliziert zu machen, ist kein Zeichen von Expertise – sie einfach zu erklären schon.',
+          'values.3.title': 'Kontinuierliches Lernen',
+          'values.3.text': 'Persönliches und berufliches Wachstum ist ein fortlaufender Weg.',
+          'values.4.title': 'Ehrlichkeit',
+          'values.4.text': 'Vertrauen ist unser wichtigstes Kapital.',
+          'voice.title': 'So arbeiten wir',
+          'voice.1.title': 'Professionell',
+          'voice.1.text': 'Unsere Empfehlungen beruhen auf Erfahrung, Analyse und echter Anwendung. Wir verzichten auf große, unbelegte Versprechen und konzentrieren uns auf Geschäftswert und Ergebnisse.',
+          'voice.2.title': 'Einfach & transparent',
+          'voice.2.text': 'Wir erklären komplexe KI-Konzepte in einer Sprache, die Führungskräfte und Unternehmer verstehen – immer mit Blick auf den praktischen Nutzen.',
+          'voice.3.title': 'Vertrauenswürdig',
+          'voice.3.text': 'Wir informieren offen, ehrlich und realistisch. Wir sprechen über Vorteile und Grenzen von KI, damit Sie eine fundierte Entscheidung treffen können.',
+          'voice.4.title': 'Inspirierend',
+          'voice.4.text': 'Statt uns auf Probleme zu konzentrieren, zeigen wir Chancen und Lösungen. Nach der Zusammenarbeit kennen Sie Ihren nächsten Schritt und können ihn gehen.',
+          'services.title': 'Unsere Leistungen',
+          'services.intro': 'Einfache, praktische Lösungen mit Fokus auf echte Geschäftsergebnisse.',
+          'services.1.title': 'Beratung zur KI-Einführung',
+          'services.1.text': 'Das richtige Problem und den richtigen Weg finden, um KI im Arbeitsalltag von Menschen und Teams einzusetzen.',
+          'services.2.title': 'Begleitung der digitalen Transformation',
+          'services.2.text': 'Praktische Umsetzung von KI mit Fokus auf echte Geschäftsergebnisse.',
+          'services.3.title': 'Praxisnahe KI-Schulungen',
+          'services.3.text': 'Einfach und Schritt für Schritt für Führungskräfte und Teams – ohne tiefes technisches Fachwissen.',
+          'services.4.title': 'Mehr Produktivität, weniger Routinearbeit',
+          'services.4.text': 'Einfache, praktische Lösungen, um Zeit zu sparen und schneller und besser zu entscheiden.',
+          'audience.title': 'Mit wem wir arbeiten',
+          'audience.1': 'Fachkräfte und Wissensarbeitende',
+          'audience.2': 'Mittleres Management',
+          'audience.3': 'Inhaber kleiner und mittlerer Unternehmen',
+          'audience.4': 'IT- und Digitalisierungsteams',
+          'fit.title': 'Kommt Ihnen das bekannt vor?',
+          'fit.now.title': 'Wo Sie heute stehen',
+          'fit.now.1': 'Alle sprechen über KI, aber Sie wissen nicht, wo Sie anfangen sollen.',
+          'fit.now.2': 'Ihr Team verbringt zu viel Zeit mit Routineaufgaben.',
+          'fit.now.3': 'Sie befürchten, hinter Wettbewerbern zurückzufallen, die KI bereits nutzen.',
+          'fit.now.4': 'Ihnen fehlt die Zeit, neue Tools zu lernen.',
+          'fit.now.5': 'Sie möchten weder Geld noch Zeit in Lösungen stecken, die sich nicht auszahlen.',
+          'fit.gain.title': 'Wobei wir Sie unterstützen',
+          'fit.gain.1': 'Einfache, praktische Wege zu einem produktiveren Team',
+          'fit.gain.2': 'Mehr Zeit, weniger Routinearbeit',
+          'fit.gain.3': 'Schnellere, bessere Entscheidungen',
+          'fit.gain.4': 'KI besser nutzen – ohne tiefes technisches Fachwissen',
+          'messages.title': 'Woran wir glauben',
+          'messages.1': 'KI ist dann wertvoll, wenn sie zu echten Geschäftsergebnissen führt.',
+          'messages.2': 'Um KI zu nutzen, müssen Sie kein Technologieexperte sein – es genügt, den richtigen Weg zu kennen.',
+          'messages.3': 'Jedes Unternehmen kann von KI profitieren, wenn es beim richtigen Problem ansetzt.',
+          'contact.title': 'Ideen mit KI in Wert verwandeln',
+          'contact.question': 'Erzählen Sie uns, wo Ihr Team am meisten Zeit verliert – wir helfen Ihnen, den richtigen Startpunkt zu finden.',
+          'power.label': 'BEL AI Consulting, Ein-/Ausschalter der Szene',
+          'pause.label': 'Animation anhalten',
+          'footer.tagline': 'Praxisnahe KI-Beratung für Führungskräfte und Unternehmen. Turn AI into Value.',
+          'footer.copy': '© 2026 BEL AI Consulting. Alle Rechte vorbehalten.',
+          'footer.col.services': 'Leistungen',
+          'footer.s1': 'KI-Einführung',
+          'footer.s2': 'Digitale Transformation',
+          'footer.s3': 'KI-Schulungen',
+          'footer.s4': 'Produktivität',
+          'footer.col.about': 'Über uns',
+          'footer.a2': 'Mission & Vision',
+          'footer.col.connect': 'Kontakt'
+        }
+      };
+
+      var root = document.documentElement;
+      var metaDesc = document.querySelector('meta[name="description"]');
+      var textEls = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+      var attrEls = Array.prototype.slice.call(document.querySelectorAll('[data-i18n-attr]'));
+      var buttons = Array.prototype.slice.call(document.querySelectorAll('.lang-switch [data-lang]'));
+      var linkedinLinks = Array.prototype.slice.call(document.querySelectorAll('a[href*="linkedin.com/in/"]'));
+
+      function parseAttrMap(el) {
+        return el.getAttribute('data-i18n-attr').split(';').map(function (part) {
+          var bits = part.split(':');
+          return { attr: bits[0].trim(), key: (bits[1] || '').trim() };
+        });
+      }
+
+      // English defaults come from the page itself
+      var base = { 'meta.description': metaDesc ? metaDesc.content : '' };
+      textEls.forEach(function (el) { base[el.getAttribute('data-i18n')] = el.innerHTML; });
+      attrEls.forEach(function (el) {
+        parseAttrMap(el).forEach(function (pair) { base[pair.key] = el.getAttribute(pair.attr); });
+      });
+
+      function lookup(lang, key) {
+        var dict = T[lang];
+        if (dict && Object.prototype.hasOwnProperty.call(dict, key)) return dict[key];
+        return base[key];
+      }
+
+      function apply(lang) {
+        if (LANGS.indexOf(lang) === -1) lang = DEFAULT_LANG;
+        root.lang = lang;
+        root.dir = DIR[lang];
+        if (metaDesc) metaDesc.content = lookup(lang, 'meta.description');
+        textEls.forEach(function (el) {
+          el.innerHTML = lookup(lang, el.getAttribute('data-i18n'));
+          var faLang = el.getAttribute('data-fa-lang');
+          if (faLang) el.lang = (lang === 'fa') ? faLang : lang;
+        });
+        attrEls.forEach(function (el) {
+          parseAttrMap(el).forEach(function (pair) { el.setAttribute(pair.attr, lookup(lang, pair.key)); });
+        });
+        buttons.forEach(function (btn) {
+          btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+        });
+        linkedinLinks.forEach(function (a) {
+          try {
+            var url = new URL(a.href);
+            url.hostname = LINKEDIN_HOST[lang] || LINKEDIN_HOST[DEFAULT_LANG];
+            a.href = url.toString();
+          } catch (err) { /* leave link as is */ }
+        });
+      }
+
+      function save(lang) {
+        try { localStorage.setItem(STORAGE_KEY, lang); } catch (err) { /* storage unavailable */ }
+        try {
+          var url = new URL(window.location.href);
+          if (lang === DEFAULT_LANG) url.searchParams.delete('lang'); else url.searchParams.set('lang', lang);
+          history.replaceState(null, '', url.toString());
+        } catch (err) { /* ignore */ }
+      }
+
+      function initialLang() {
+        try {
+          var fromUrl = new URLSearchParams(window.location.search).get('lang');
+          if (fromUrl && LANGS.indexOf(fromUrl) !== -1) return fromUrl;
+        } catch (err) { /* ignore */ }
+        try {
+          var stored = localStorage.getItem(STORAGE_KEY);
+          if (stored && LANGS.indexOf(stored) !== -1) return stored;
+        } catch (err) { /* ignore */ }
+        // First visit: follow the browser's language list (en, fa or de), else English
+        try {
+          var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+          for (var i = 0; i < prefs.length; i++) {
+            var code = String(prefs[i] || '').toLowerCase().split('-')[0];
+            if (LANGS.indexOf(code) !== -1) return code;
+          }
+        } catch (err) { /* ignore */ }
+        return DEFAULT_LANG;
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var lang = btn.getAttribute('data-lang');
+          apply(lang);
+          save(lang);
+        });
+      });
+
+      var start = initialLang();
+      if (start !== DEFAULT_LANG) apply(start);
+    })();
+  </script>
+</body>
+</html>
