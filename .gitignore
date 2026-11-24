@@ -3,3 +3,5 @@
 *.pdf
 # Unrelated project
 boby-s-bahn/
+.vercel
+.env*
