@@ -647,6 +647,11 @@
     .copy-status { font-size: 14px; color: #15803D; }
     .copy-fallback { width: 100%; min-height: 150px; margin-top: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; font: inherit; font-size: 14px; }
     .booking-done .booking-actions { justify-content: center; }
+    .booking-done .done-mailto { display: none; }
+    .booking-done.is-mailto .done-mailto { display: block; }
+    .botcheck { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+    .send-error { margin-top: 16px; text-align: start; }
+    form[aria-busy="true"] [data-send] { opacity: 0.75; cursor: progress; }
 
     @media (max-width: 640px) {
       .booking-inner { padding: 20px 18px 22px; }
@@ -1157,9 +1162,13 @@
           <label for="book-topic" data-i18n="book.topic">What would you like to talk about? (optional)</label>
           <textarea id="book-topic" name="topic" rows="3" autocomplete="off"></textarea>
         </div>
+        <!-- spam trap: hidden from people, bots fill it in -->
+        <input class="botcheck" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="booking-error send-error" role="alert" hidden></p>
         <div class="booking-actions">
           <button class="btn btn-ghost" type="button" data-back data-i18n="book.back">Back</button>
-          <button class="btn btn-accent" type="submit" data-i18n="book.send">Send Request</button>
+          <button class="btn btn-ghost" type="button" data-mailapp hidden data-i18n="book.mailapp">Send with Email App</button>
+          <button class="btn btn-accent" type="submit" data-send><span data-i18n="book.send">Send Request</span></button>
         </div>
       </form>
 
@@ -1172,6 +1181,8 @@
           <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
           <span class="done-chosen-text"></span>
         </p>
+        <!-- only when the request went through the visitor's email app (fallback) -->
+        <div class="done-mailto">
         <p class="done-note" data-i18n="book.copyHint">Your email app should have opened with your request to <strong>nasrin.bel@gmx.de</strong>. Please make sure to send it. Didn’t open? Copy the request and send it yourself.</p>
         <div class="copy-row">
           <button class="btn btn-ghost btn-sm" type="button" data-copy>
@@ -1181,6 +1192,7 @@
           <span class="copy-status" aria-live="polite"></span>
         </div>
         <textarea class="copy-fallback" readonly hidden aria-label="Request text"></textarea>
+        </div>
         <div class="booking-actions">
           <button class="btn btn-accent" type="button" data-close data-i18n="book.done">Done</button>
         </div>
@@ -1608,6 +1620,9 @@
 
       var TZ = 'Europe/Berlin';
       var EMAIL = 'nasrin.bel@gmx.de';
+      // Web3Forms access key: lets the site email each booking to EMAIL by itself (free key at web3forms.com).
+      // The key is meant to be public. Empty = fall back to opening the visitor's own email app.
+      var WEB3FORMS_KEY = '5ee2ce27-ec75-439a-96d2-e9c32e67dc98';
       var SLOTS = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'];
       var LEAD_MS = 2 * 60 * 60 * 1000;        // earliest bookable slot: 2 hours from now
       var RANGE_DAYS = 90;                      // bookable up to about 3 months ahead
@@ -1623,6 +1638,8 @@
           needName: 'Please enter your name.',
           needEmail: 'Please enter a valid email address, e.g. name@company.com.',
           copied: 'Copied to clipboard.',
+          sending: 'Sending…',
+          sendError: 'We couldn’t send your request just now. Please try again, or send it with your email app.',
           mailSubject: 'Consultation request: {when}',
           mailHello: 'Hello Nasrin,',
           mailIntro: 'I would like to book a consultation.',
@@ -1641,6 +1658,8 @@
           needName: 'لطفاً نام خود را وارد کنید.',
           needEmail: 'لطفاً یک ایمیل معتبر وارد کنید، مثلاً name@company.com.',
           copied: 'کپی شد.',
+          sending: 'در حال ارسال…',
+          sendError: 'ارسال درخواست الان ممکن نشد. لطفاً دوباره امتحان کنید یا آن را با برنامه‌ی ایمیل خود بفرستید.',
           mailSubject: 'درخواست مشاوره: {when}',
           mailHello: 'سلام نسرین،',
           mailIntro: 'می‌خواهم یک وقت مشاوره رزرو کنم.',
@@ -1659,6 +1678,8 @@
           needName: 'Bitte geben Sie Ihren Namen ein.',
           needEmail: 'Bitte geben Sie eine gültige E-Mail-Adresse ein, z. B. name@firma.de.',
           copied: 'In die Zwischenablage kopiert.',
+          sending: 'Wird gesendet…',
+          sendError: 'Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut oder senden Sie sie mit Ihrem E-Mail-Programm.',
           mailSubject: 'Beratungsanfrage: {when}',
           mailHello: 'Hallo Nasrin,',
           mailIntro: 'ich möchte gern einen Beratungstermin buchen.',
@@ -1952,8 +1973,72 @@
         pair[0].addEventListener('input', function () { if (pair[0].getAttribute('aria-invalid') === 'true') setFieldError(pair[0], pair[1], ''); });
       });
 
+      /* ---------- sending: straight to the inbox via Web3Forms, email app only as a fallback ---------- */
+      var sendBtn = q('[data-send]');
+      var mailAppBtn = q('[data-mailapp]');
+      var sendError = q('.send-error');
+      var doneStep = q('[data-step="3"]');
+      var sending = false, pending = null;
+
+      function buildRequest(name, email, topic) {
+        var when = whenText(st.time), local = localText(st.time);
+        var lines = [t('mailHello'), '', t('mailIntro'), '', t('mailTime') + ': ' + when + ' (Berlin)'];
+        if (local) lines.push(t('mailLocal') + ': ' + local);
+        lines.push(t('mailName') + ': ' + name, t('mailEmail') + ': ' + email);
+        if (topic) lines.push(t('mailTopic') + ': ' + topic);
+        lines.push('', t('mailFooter'));
+        var fields = { 'Name': name, 'Email': email, 'Requested time (Berlin)': when };
+        if (local) fields['Visitor local time'] = local;
+        if (topic) fields['Topic'] = topic;
+        fields['Website language'] = lang();
+        return { subject: t('mailSubject', { when: when }), body: lines.join('\n'), email: email, fields: fields };
+      }
+      function showDone(viaMailApp) {
+        st.done = true;
+        els.doneChosen.innerHTML = chosenHtml();
+        doneStep.classList.toggle('is-mailto', viaMailApp);
+        goStep(3);
+      }
+      function sendWithMailApp(req) {
+        st.mailText = 'To: ' + EMAIL + '\nSubject: ' + req.subject + '\n\n' + req.body;
+        showDone(true);
+        window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(req.subject) +
+          '&body=' + encodeURIComponent(req.body).replace(/%0A/g, '%0D%0A');
+      }
+      function sendOnline(req) {
+        var payload = Object.assign({
+          access_key: WEB3FORMS_KEY,
+          subject: req.subject,
+          from_name: 'BEL AI Consulting website',
+          replyto: req.email                       // "Reply" in your inbox goes straight to the visitor
+        }, req.fields);
+        // Sent as plain form data, not JSON: Web3Forms refuses the browser's permission check (CORS preflight) that JSON triggers
+        var body = new FormData();
+        Object.keys(payload).forEach(function (k) { body.append(k, payload[k]); });
+        var ctrl = 'AbortController' in window ? new AbortController() : null;
+        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 15000) : 0;
+        return fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: body,
+          signal: ctrl ? ctrl.signal : undefined
+        }).then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            clearTimeout(timer);
+            if (!res.ok || !data.success) throw new Error(data.message || 'Sending failed');
+            return data;
+          });
+        }, function (err) { clearTimeout(timer); throw err; });
+      }
+      function setSending(on, label) {
+        sending = on;
+        els.form.setAttribute('aria-busy', on ? 'true' : 'false');
+        sendBtn.disabled = on;
+        sendBtn.firstElementChild.textContent = on ? t('sending') : label;
+      }
+
       els.form.addEventListener('submit', function (e) {
         e.preventDefault();
+        if (sending) return;
         var name = els.name.value.trim();
         var email = els.email.value.trim();
         var emailOk = !!email && els.email.checkValidity();
@@ -1961,22 +2046,29 @@
         setFieldError(els.email, els.emailErr, emailOk ? '' : t('needEmail'));
         if (!name) { els.name.focus(); return; }
         if (!emailOk) { els.email.focus(); return; }
+        if (els.form.querySelector('.botcheck').checked) { showDone(false); return; }   // a bot: quietly drop it
 
-        var when = whenText(st.time), local = localText(st.time), topic = els.topic.value.trim();
-        var lines = [t('mailHello'), '', t('mailIntro'), '', t('mailTime') + ': ' + when + ' (Berlin)'];
-        if (local) lines.push(t('mailLocal') + ': ' + local);
-        lines.push(t('mailName') + ': ' + name, t('mailEmail') + ': ' + email);
-        if (topic) lines.push(t('mailTopic') + ': ' + topic);
-        lines.push('', t('mailFooter'));
-        var subject = t('mailSubject', { when: when });
-        var body = lines.join('\n');
-        st.mailText = 'To: ' + EMAIL + '\nSubject: ' + subject + '\n\n' + body;
-        st.done = true;
-        els.doneChosen.innerHTML = chosenHtml();
-        goStep(3);
-        window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) +
-          '&body=' + encodeURIComponent(body).replace(/%0A/g, '%0D%0A');
+        var req = buildRequest(name, email, els.topic.value.trim());
+        pending = req;
+        st.mailText = 'To: ' + EMAIL + '\nSubject: ' + req.subject + '\n\n' + req.body;
+        sendError.hidden = true;
+        mailAppBtn.hidden = true;
+        if (!WEB3FORMS_KEY) { sendWithMailApp(req); return; }
+
+        var label = sendBtn.firstElementChild.textContent;
+        setSending(true);
+        sendOnline(req).then(function () {
+          setSending(false, label);
+          showDone(false);
+        }, function () {
+          setSending(false, label);
+          sendError.textContent = t('sendError');
+          sendError.hidden = false;
+          mailAppBtn.hidden = false;
+          mailAppBtn.focus();
+        });
       });
+      mailAppBtn.addEventListener('click', function () { if (pending) sendWithMailApp(pending); });
 
       q('[data-copy]').addEventListener('click', function () {
         var text = st.mailText;
@@ -2004,6 +2096,10 @@
         setFieldError(els.email, els.emailErr, '');
         els.copyStatus.textContent = '';
         els.copyFallback.hidden = true;
+        sendError.hidden = true;
+        mailAppBtn.hidden = true;
+        doneStep.classList.remove('is-mailto');
+        pending = null;
         showError('');
       }
       function open() {
@@ -2222,6 +2318,7 @@
           'book.copyHint': 'برنامه‌ی ایمیل شما باید با درخواستتان به <strong>nasrin.bel@gmx.de</strong> باز شده باشد؛ لطفاً حتماً آن را بفرستید. باز نشد؟ متن درخواست را کپی کنید و خودتان بفرستید.',
           'book.copy': 'کپی درخواست',
           'book.done': 'تمام',
+          'book.mailapp': 'ارسال با برنامه‌ی ایمیل',
           'footer.tagline': 'مشاوره‌ی کاربردی هوش مصنوعی برای مدیران و کسب‌وکارها.',
           'footer.copy': '© ۲۰۲۶ BEL AI Consulting. همه‌ی حقوق محفوظ است.',
           'footer.col.services': 'خدمات',
@@ -2326,6 +2423,7 @@
           'book.copyHint': 'Ihr E-Mail-Programm sollte sich mit Ihrer Anfrage an <strong>nasrin.bel@gmx.de</strong> geöffnet haben – bitte senden Sie sie unbedingt ab. Nichts passiert? Kopieren Sie die Anfrage und senden Sie sie selbst.',
           'book.copy': 'Anfrage kopieren',
           'book.done': 'Fertig',
+          'book.mailapp': 'Mit E-Mail-Programm senden',
           'footer.tagline': 'Praxisnahe KI-Beratung für Führungskräfte und Unternehmen. Turn AI into Value.',
           'footer.copy': '© 2026 BEL AI Consulting. Alle Rechte vorbehalten.',
           'footer.col.services': 'Leistungen',
